@@ -44,4 +44,5 @@ class PublicApi {
       parse: PublicProductResponse.fromJson,
     );
   }
+
 }

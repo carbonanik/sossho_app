@@ -70,7 +70,7 @@ class _EditDeliveryAddressPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Settings'),
+        title: const Text('Delivery Address'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -158,7 +158,8 @@ class _EditDeliveryAddressPageState
                             final res = await ref
                                 .read(deliveryAddressProvider.notifier)
                                 .deleteDeliveryAddress(
-                                    addressId: deliveryAddress.valueOrNull!.id!);
+                                    addressId:
+                                        deliveryAddress.valueOrNull!.id!);
                             if (res is AsyncData && context.mounted) {
                               showSnackBar(context,
                                   'Delivery address deleted successfully');

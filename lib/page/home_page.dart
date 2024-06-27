@@ -6,6 +6,7 @@ import 'package:sossho_app/page/cart_page.dart';
 
 import 'package:sossho_app/page/product_detail_page.dart';
 import 'package:sossho_app/page/profile_page.dart';
+import 'package:sossho_app/providers/categories_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
 
 import '../providers/public_product_provider.dart';
@@ -31,12 +32,11 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           context.push(const MyCartPage());
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.shopping_bag),
       ),
       body: Container(
         color: backgroundColor,
         child: CustomScrollView(
-          // physics: const BouncingScrollPhysics(),
           slivers: [
             /// top selector
             _buildHeader(context),
@@ -70,36 +70,46 @@ class HomePage extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: (20)),
-        height: 120,
+        height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
         ),
-        child: GridView.count(
-          crossAxisCount: 2,
-          scrollDirection: Axis.horizontal,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: .4,
-          children: List.generate(
-            10,
-            (index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Category Name',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+        child: Consumer(
+          builder: (context, ref, child) {
+            final categories = ref.watch(categoriesProvider);
+            return GridView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.valueOrNull?.productCategory?.length ?? 0,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: .8,
+              ),
+              itemBuilder: (context, index) {
+                final category = categories.value!.productCategory![index];
+                return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                  ),
-                ),
-              );
-            },
-          ),
+                    child: Column(
+                      children: [
+                        const Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Icon(Icons.category, size: 40)),
+                        Text(
+                          category.title ?? 'Category Name',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ));
+              },
+            );
+          },
         ),
       ),
     );

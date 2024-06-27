@@ -12,9 +12,13 @@ part 'billing_address_provider.g.dart';
 @riverpod
 class BillingAddress extends _$BillingAddress {
   @override
-  Future<GetBillingAddressResponse> build() async {
+  Future<GetBillingAddressResponse?> build() async {
     final api = await ref.read(secureApiProvider.future);
-    return await api.getBillingAddress();
+    try {
+      return await api.getBillingAddress();
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<AsyncValue> deleteBillingAddress({

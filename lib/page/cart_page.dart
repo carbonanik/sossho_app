@@ -2,7 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sossho_app/model/create_order_request.dart';
+import 'package:sossho_app/providers/api_provider.dart';
+import 'package:sossho_app/utils/error_as_value.dart';
 import 'package:sossho_app/utils/navigation.dart';
+import 'package:sossho_app/utils/show_snack_bar.dart';
 import 'package:sossho_app/widgets/app_button.dart';
 
 import '../providers/cart_provider.dart';
@@ -82,13 +86,52 @@ class MyCartPage extends StatelessWidget {
 
             /// Continue to pay button
             Expanded(
-              child: AppButton(
-                onPressed: () {
-                  // Get.toNamed(RouteHelper.getPaymentMethod());
-                  // AutoRouter.of(context).push(const PaymentMethodRoute());
-                },
-                child: const Text('Place Order'),
-              ),
+              child: Consumer(builder: (context, ref, child) {
+                return AppButton(
+                  onPressed: () async {
+                    final cart = ref.read(cartProvider);
+                    final api = await ref.read(secureApiProvider.future);
+                    final res = await api
+                        .createOrder(
+                            request: CreateOrderRequest(
+                          billingAddress: const Address(
+                            city: 'Dhaka',
+                            country: 'Bangladesh',
+                            state: 'Dhaka',
+                            street: 'Dhaka',
+                            zipcode: '1000',
+                          ),
+                          deliveryAddress: const Address(
+                            city: 'Dhaka',
+                            country: 'Bangladesh',
+                            state: 'Dhaka',
+                            street: 'Dhaka',
+                            zipcode: '1000',
+                          ),
+                          discountAmount: 0,
+                          paymentMethod: 'ONLINE',
+                          productId:
+                              cart.valueOrNull?.cart?.firstOrNull?.productId ??
+                                  '',
+                          quantity: int.tryParse(cart.valueOrNull?.cart
+                                      ?.firstOrNull?.quantity ??
+                                  '0') ??
+                              0,
+                        ))
+                        .errorAsValue();
+
+                    if (!context.mounted) return;
+                    if (res is AsyncData) {
+                      showSnackBar(context, 'Order Placed Successfully');
+                    }
+                    if (res is AsyncError) {
+                      showSnackBar(context, res.error.toString());
+                    }
+                    ref.invalidate(cartProvider);
+                  },
+                  child: const Text('Place Order'),
+                );
+              }),
             ),
           ],
         ),

@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:sossho_app/model/create_order_request.dart';
 import 'package:sossho_app/model/get_billing_address_response.dart';
 import 'package:sossho_app/model/get_cart_response.dart';
+import 'package:sossho_app/model/get_categories_response.dart';
 import 'package:sossho_app/model/profile_update_request.dart';
 import 'package:sossho_app/model/update_billing_address.request.dart';
 
@@ -19,6 +21,14 @@ class SecureApi {
     return await _client.request(
       path: Links.products,
       method: MethodType.get,
+    );
+  }
+
+  Future<GetCategoriesResponse> getCategories() async {
+    return await _client.request(
+      path: Links.category,
+      method: MethodType.get,
+      parse: GetCategoriesResponse.fromJson,
     );
   }
 
@@ -168,6 +178,17 @@ class SecureApi {
     return await _client.request(
       path: '${Links.deliveryAddress}/$addressId',
       method: MethodType.delete,
+    );
+  }
+
+  Future createOrder({
+    required CreateOrderRequest request,
+  }) async {
+    return _client.request(
+      path: Links.order,
+      method: MethodType.post,
+      payload: request.toJson(),
+      parse: (data) => data,
     );
   }
 }
