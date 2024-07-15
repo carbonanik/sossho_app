@@ -1,16 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:sossho_app/page/home_page.dart';
-import 'package:sossho_app/page/sign_up_page.dart';
+import 'package:sossho_app/page/auth/forgot_password_page.dart';
+import 'package:sossho_app/page/main_tabs.dart';
+import 'package:sossho_app/page/auth/sign_up_page.dart';
 import 'package:sossho_app/utils/navigation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sossho_app/utils/validator.dart';
 
-import '../providers/login_provider.dart';
-import '../utils/show_snack_bar.dart';
-import '../widgets/add_password_field.dart';
-import '../widgets/add_text_field.dart';
-import '../widgets/app_button.dart';
+import '../../providers/login_provider.dart';
+import '../../utils/show_snack_bar.dart';
+import '../../widgets/add_password_field.dart';
+import '../../widgets/add_text_field.dart';
+import '../../widgets/app_button.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -23,7 +24,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
 
   @override
   void initState() {
@@ -55,7 +55,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     });
     ref.listen(loginSuccessProvider, (previous, next) {
       if (next != null) {
-        context.push(const HomePage());
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const MainTabs()),
+          (route) => false,
+        );
       }
     });
     return Scaffold(
@@ -111,7 +115,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                context.push(ForgotPasswordPage());
+                              },
                               customBorder: const StadiumBorder(),
                               child: const Align(
                                 alignment: Alignment.centerRight,
@@ -128,9 +134,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               ref.read(loginProvider.notifier).login(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              );
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  );
                             }
                           },
                           child: const Text('Login'),

@@ -9,7 +9,8 @@ import '../backend/auth_persist_data.dart';
 import '../backend/links.dart';
 import '../providers/user_profile_provider.dart';
 import '../widgets/app_button.dart';
-import 'login_page.dart';
+import 'auth/login_page.dart';
+import 'change_password_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -134,7 +135,7 @@ class ProfilePage extends StatelessWidget {
   GestureDetector _buildChangePassword(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // context.push(const ChangePasswordPage());
+        context.push(const ChangePasswordPage());
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),

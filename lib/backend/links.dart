@@ -5,6 +5,10 @@ class Links {
 
   static String signUp = '/api/v1/public/user/signup';
 
+  static String forgotPassword = '/api/v1/public/forgot-password';
+
+  static String resetPassword = '/api/v1/public/reset-password';
+
   static String productsPublic = '/api/v1/public/product';
 
   static String productsCategory = '/api/v1/public/product-category';
@@ -24,4 +28,5 @@ class Links {
 
   static String order = '/api/v1/secured/orders';
 
+  static String changePassword = '/api/v1/secured/change-password';
 }

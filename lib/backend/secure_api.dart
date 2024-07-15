@@ -48,6 +48,7 @@ class SecureApi {
         'product_id': productId,
         'quantity': quantity,
       },
+      parse: (data) => data,
     );
   }
 
@@ -64,6 +65,7 @@ class SecureApi {
         'product_id': productId,
         'quantity': quantity,
       },
+      parse: (data) => data,
     );
   }
 
@@ -73,6 +75,7 @@ class SecureApi {
     return await _client.request(
       path: '${Links.cart}/$cartId',
       method: MethodType.delete,
+      parse: (data) => data,
     );
   }
 
@@ -118,6 +121,7 @@ class SecureApi {
       path: Links.billingAddress,
       method: MethodType.post,
       payload: request.toJson(),
+      parse: (data) => data,
     );
   }
 
@@ -139,6 +143,7 @@ class SecureApi {
     return await _client.request(
       path: '${Links.billingAddress}/$addressId',
       method: MethodType.delete,
+      parse: (data) => data,
     );
   }
 
@@ -157,6 +162,7 @@ class SecureApi {
       path: Links.deliveryAddress,
       method: MethodType.post,
       payload: request.toJson(),
+      parse: (data) => data,
     );
   }
 
@@ -178,6 +184,7 @@ class SecureApi {
     return await _client.request(
       path: '${Links.deliveryAddress}/$addressId',
       method: MethodType.delete,
+      parse: (data) => data,
     );
   }
 
@@ -190,5 +197,21 @@ class SecureApi {
       payload: request.toJson(),
       parse: (data) => data,
     );
+  }
+
+  Future changePassword({
+    required String oldPassword,
+    required String newPassword,
+}) async {
+    return _client.request(
+      path: Links.changePassword,
+      method: MethodType.put,
+      payload: {
+        "old_password": oldPassword,
+        "new_password": newPassword,
+      },
+      parse: (data) => data,
+    );
+
   }
 }

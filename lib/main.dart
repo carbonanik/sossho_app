@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sossho_app/page/login_page.dart';
+import 'package:sossho_app/page/all_reviews_page.dart';
+import 'package:sossho_app/page/auth/login_page.dart';
+import 'package:sossho_app/page/favorites_page.dart';
+import 'package:sossho_app/page/home_page.dart';
+import 'package:sossho_app/page/main_tabs.dart';
+import 'package:sossho_app/page/my_order_page.dart';
+import 'package:sossho_app/page/search_filter_page.dart';
+import 'package:sossho_app/page/search_list_page.dart';
+import 'package:sossho_app/page/seller_home_page.dart';
+import 'package:sossho_app/page/ssl_com_test.dart';
+import 'package:sossho_app/providers/login_provider.dart';
 import 'package:sossho_app/utils/colors.dart';
 
 void main() {
@@ -23,7 +33,7 @@ class MyApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        home: const LoginPage(),
+        home: const SellerHomePage(),
       ),
     );
   }

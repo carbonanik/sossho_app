@@ -3,14 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:sossho_app/page/auth/otp_verify_page.dart';
 import 'package:sossho_app/providers/sign_up_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
 import 'package:sossho_app/utils/show_snack_bar.dart';
-import '../model/sign_up_request.dart';
-import '../utils/validator.dart';
-import '../widgets/add_password_field.dart';
-import '../widgets/add_text_field.dart';
-import '../widgets/app_button.dart';
+import '../../model/sign_up_request.dart';
+import '../../utils/validator.dart';
+import '../../widgets/add_password_field.dart';
+import '../../widgets/add_text_field.dart';
+import '../../widgets/app_button.dart';
 import 'login_page.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
@@ -193,18 +194,19 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                         const SizedBox(height: 26.0),
                         AppButton(
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              ref.read(signUpProvider.notifier).signUp(
-                                    data: SignUpRequest(
-                                      fullName: _fullNameController.text,
-                                      mobile: _mobileNumberController.text,
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
-                                      dateOfBirth: _dateOfBirthController.text,
-                                      gender: _gender.toUpperCase(),
-                                    ),
-                                  );
-                            }
+                            // if (formKey.currentState!.validate()) {
+                            //   ref.read(signUpProvider.notifier).signUp(
+                            //         data: SignUpRequest(
+                            //           fullName: _fullNameController.text,
+                            //           mobile: _mobileNumberController.text,
+                            //           email: _emailController.text,
+                            //           password: _passwordController.text,
+                            //           dateOfBirth: _dateOfBirthController.text,
+                            //           gender: _gender.toUpperCase(),
+                            //         ),
+                            //       );
+                            // }
+                            context.push(const OtpVerifyPage());
                           },
                           child: const Text('Register'),
                         ),

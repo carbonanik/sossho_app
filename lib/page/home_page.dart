@@ -6,6 +6,7 @@ import 'package:sossho_app/page/cart_page.dart';
 
 import 'package:sossho_app/page/product_detail_page.dart';
 import 'package:sossho_app/page/profile_page.dart';
+import 'package:sossho_app/page/search_list_page.dart';
 import 'package:sossho_app/providers/categories_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
 
@@ -13,27 +14,24 @@ import '../providers/public_product_provider.dart';
 import '../utils/colors.dart';
 import '../widgets/product_grid_item.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
-    List<String> featuredImages = [
-      'https://res.cloudinary.com/carbon-dev/image/upload/v1658207526/samples/food/spices.jpg',
-      'https://res.cloudinary.com/carbon-dev/image/upload/v1658207539/cld-sample-4.jpg',
-      'https://res.cloudinary.com/carbon-dev/image/upload/v1658207516/samples/food/dessert.jpg',
-      'https://res.cloudinary.com/carbon-dev/image/upload/v1658207518/samples/food/pot-mussels.jpg',
-    ];
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  List<String> featuredImages = [
+    'https://res.cloudinary.com/carbon-dev/image/upload/v1658207526/samples/food/spices.jpg',
+    'https://res.cloudinary.com/carbon-dev/image/upload/v1658207539/cld-sample-4.jpg',
+    'https://res.cloudinary.com/carbon-dev/image/upload/v1658207516/samples/food/dessert.jpg',
+    'https://res.cloudinary.com/carbon-dev/image/upload/v1658207518/samples/food/pot-mussels.jpg',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.push(const MyCartPage());
-        },
-        child: const Icon(Icons.shopping_bag),
-      ),
       body: Container(
         color: backgroundColor,
         child: CustomScrollView(
@@ -69,7 +67,7 @@ class HomePage extends StatelessWidget {
   SliverToBoxAdapter _buildCategoryList(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: (20)),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -89,59 +87,41 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final category = categories.value!.productCategory![index];
                 return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      children: [
-                        const Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: Icon(Icons.category, size: 40)),
-                        Text(
-                          category.title ?? 'Category Name',
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        // padding: const EdgeInsets.all(10.0),
+                        width: 100,
+                        height: 60,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
                           ),
                         ),
-                      ],
-                    ));
+                        clipBehavior: Clip.hardEdge,
+                        child: Image.network(
+                          'https://picsum.photos/200/300?random=$index',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Text(
+                        category.title ?? 'Category Name',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               },
             );
           },
-        ),
-      ),
-    );
-  }
-
-  SliverToBoxAdapter _buildSearchBox(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: (20)),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular((12)),
-        ),
-        child: TextField(
-          decoration: InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              hintText: 'Search',
-              prefixIcon: const Icon(
-                Icons.search,
-                color: accentColor,
-              ),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide:
-                      const BorderSide(width: 1.0, color: Colors.green)),
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide:
-                      const BorderSide(width: 1.0, color: Colors.white)),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-              )),
         ),
       ),
     );
@@ -151,17 +131,17 @@ class HomePage extends StatelessWidget {
       BuildContext context, List<String> featuredImages) {
     return SliverToBoxAdapter(
       child: Container(
-        height: (150),
-        width: (300),
+        height: 150,
+        width: 300,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular((12)),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: PageView.builder(
             itemCount: featuredImages.length,
             itemBuilder: (context, index) {
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: (10)),
-                margin: const EdgeInsets.symmetric(horizontal: (20)),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: index.isOdd
@@ -178,7 +158,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  SliverToBoxAdapter _buildHeader(BuildContext context) {
+  Widget _buildHeader(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -255,28 +235,39 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular((12)),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: TextField(
+                onTap: () {
+                  context.push(const SearchListPage());
+                },
+                readOnly: true,
                 decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    hintText: 'Search',
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: accentColor,
+                  fillColor: Colors.white,
+                  filled: true,
+                  hintText: 'Search',
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: accentColor,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                      width: 1.0,
+                      color: Colors.green,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular((10)),
-                        borderSide:
-                            const BorderSide(width: 1.0, color: Colors.green)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular((10)),
-                        borderSide:
-                            const BorderSide(width: 1.0, color: Colors.white)),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((20)),
-                    )),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                      width: 1.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
               ),
             ),
           ],
@@ -297,11 +288,7 @@ class HomePage extends StatelessWidget {
   SliverToBoxAdapter _buildSectionHeader(BuildContext context, String text) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: (20)),
-        // decoration: BoxDecoration(
-        //   borderRadius: BorderRadius.circular((12)),
-        // color: Colors.green,
-        // ),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -312,9 +299,7 @@ class HomePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: (20),
-            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -325,7 +310,7 @@ class HomePage extends StatelessWidget {
     return Consumer(builder: (context, ref, child) {
       final products = ref.watch(publicProductProviderProvider);
       return SliverPadding(
-        padding: const EdgeInsets.symmetric(horizontal: (20)),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         sliver: SliverGrid.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -345,60 +330,5 @@ class HomePage extends StatelessWidget {
         ),
       );
     });
-  }
-}
-
-class CustomSilverHeaderDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  final double minExtent;
-  @override
-  final double maxExtent;
-
-  CustomSilverHeaderDelegate(this.minExtent, this.maxExtent);
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Image.asset(
-          'assets/images/delivery_man.png',
-          fit: BoxFit.cover,
-        ),
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.transparent, Colors.black45],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: [.5, 1.0],
-            ),
-          ),
-        ),
-        Positioned(
-            left: (16),
-            right: (16),
-            bottom: (16),
-            child: Text(
-              'Lorem ipsome',
-              style: TextStyle(
-                fontSize: (32),
-                color: Colors.white.withOpacity(
-                  titleOpacity(shrinkOffset),
-                ),
-              ),
-            ))
-      ],
-    );
-  }
-
-  double titleOpacity(double shrinkOffset) {
-    return 1 - max(0.0, shrinkOffset) / maxExtent;
-  }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
   }
 }

@@ -37,6 +37,36 @@ class PublicApi {
     );
   }
 
+  Future forgotPassword({
+    required String email,
+  }) {
+    return _client.request(
+      path: Links.forgotPassword,
+      method: MethodType.post,
+      payload: {
+        "email": email,
+      },
+    );
+  }
+
+  Future resetPassword({
+    required String email,
+    required String otpId,
+    required String otpCode,
+    required String password,
+  }) {
+    return _client.request(
+      path: Links.resetPassword,
+      method: MethodType.post,
+      payload: {
+        "email": email,
+        "otp_id": otpId,
+        "otp_code": otpCode,
+        "password": password,
+      },
+    );
+  }
+
   Future<PublicProductResponse> getProducts() async {
     return await _client.request(
       path: Links.productsPublic,
@@ -44,5 +74,4 @@ class PublicApi {
       parse: PublicProductResponse.fromJson,
     );
   }
-
 }

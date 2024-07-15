@@ -6,12 +6,14 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget? child;
   final Color? backgroundColor;
+  final Color? foregroundColor;
 
   const AppButton({
     super.key,
     this.onPressed,
     this.child,
     this.backgroundColor,
+    this.foregroundColor,
   });
 
   @override
@@ -19,12 +21,12 @@ class AppButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all(
+        minimumSize: WidgetStateProperty.all(
           const Size(double.infinity, 46),
         ),
-        backgroundColor: MaterialStateProperty.all(backgroundColor ?? accentColor),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        backgroundColor: WidgetStateProperty.all(backgroundColor ?? accentColor),
+        foregroundColor: WidgetStateProperty.all(foregroundColor ?? Colors.white),
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),
           ),

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sossho_app/page/all_reviews_page.dart';
 import 'package:sossho_app/page/cart_page.dart';
 import 'package:sossho_app/providers/cart_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
@@ -102,23 +103,44 @@ class ProductDetailPage extends StatelessWidget {
                             fontSize: 26,
                           ),
                         ),
-                      ],
-                    ),
-                    const Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        Text(
-                          '4.8',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                            color: Colors.grey,
+                        InkWell(
+                          onTap: () {
+                            context.push(const AllReviewsPage());
+                          },
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              Text(
+                                '4.8',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Text(
+                                ' (124 Reviews)',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
+                    ),
+                    InkWell(
+                      onTap: () {
+                        context.push(const AllReviewsPage());
+                      },
+                      child: const Icon(
+                        Icons.favorite,
+                        color: Colors.redAccent,
+                      ),
                     )
                   ],
                 ),
@@ -169,7 +191,7 @@ class ProductDetailPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Total',
+                      'Price',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey.shade100,
