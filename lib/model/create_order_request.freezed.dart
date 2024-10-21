@@ -20,20 +20,14 @@ CreateOrderRequest _$CreateOrderRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CreateOrderRequest {
-  @JsonKey(name: "product_id")
-  String? get productId => throw _privateConstructorUsedError;
-  @JsonKey(name: "quantity")
-  int? get quantity => throw _privateConstructorUsedError;
+  @JsonKey(name: "orderItems")
+  List<OrderItem>? get orderItems => throw _privateConstructorUsedError;
   @JsonKey(name: "deliveryAddress")
   Address? get deliveryAddress => throw _privateConstructorUsedError;
   @JsonKey(name: "billingAddress")
   Address? get billingAddress => throw _privateConstructorUsedError;
   @JsonKey(name: "paymentMethod")
   String? get paymentMethod => throw _privateConstructorUsedError;
-  @JsonKey(name: "discountCode")
-  String? get discountCode => throw _privateConstructorUsedError;
-  @JsonKey(name: "discountAmount")
-  int? get discountAmount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,13 +42,10 @@ abstract class $CreateOrderRequestCopyWith<$Res> {
       _$CreateOrderRequestCopyWithImpl<$Res, CreateOrderRequest>;
   @useResult
   $Res call(
-      {@JsonKey(name: "product_id") String? productId,
-      @JsonKey(name: "quantity") int? quantity,
+      {@JsonKey(name: "orderItems") List<OrderItem>? orderItems,
       @JsonKey(name: "deliveryAddress") Address? deliveryAddress,
       @JsonKey(name: "billingAddress") Address? billingAddress,
-      @JsonKey(name: "paymentMethod") String? paymentMethod,
-      @JsonKey(name: "discountCode") String? discountCode,
-      @JsonKey(name: "discountAmount") int? discountAmount});
+      @JsonKey(name: "paymentMethod") String? paymentMethod});
 
   $AddressCopyWith<$Res>? get deliveryAddress;
   $AddressCopyWith<$Res>? get billingAddress;
@@ -73,23 +64,16 @@ class _$CreateOrderRequestCopyWithImpl<$Res, $Val extends CreateOrderRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? productId = freezed,
-    Object? quantity = freezed,
+    Object? orderItems = freezed,
     Object? deliveryAddress = freezed,
     Object? billingAddress = freezed,
     Object? paymentMethod = freezed,
-    Object? discountCode = freezed,
-    Object? discountAmount = freezed,
   }) {
     return _then(_value.copyWith(
-      productId: freezed == productId
-          ? _value.productId
-          : productId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      quantity: freezed == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int?,
+      orderItems: freezed == orderItems
+          ? _value.orderItems
+          : orderItems // ignore: cast_nullable_to_non_nullable
+              as List<OrderItem>?,
       deliveryAddress: freezed == deliveryAddress
           ? _value.deliveryAddress
           : deliveryAddress // ignore: cast_nullable_to_non_nullable
@@ -102,14 +86,6 @@ class _$CreateOrderRequestCopyWithImpl<$Res, $Val extends CreateOrderRequest>
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
               as String?,
-      discountCode: freezed == discountCode
-          ? _value.discountCode
-          : discountCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      discountAmount: freezed == discountAmount
-          ? _value.discountAmount
-          : discountAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
   }
 
@@ -147,13 +123,10 @@ abstract class _$$CreateOrderRequestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "product_id") String? productId,
-      @JsonKey(name: "quantity") int? quantity,
+      {@JsonKey(name: "orderItems") List<OrderItem>? orderItems,
       @JsonKey(name: "deliveryAddress") Address? deliveryAddress,
       @JsonKey(name: "billingAddress") Address? billingAddress,
-      @JsonKey(name: "paymentMethod") String? paymentMethod,
-      @JsonKey(name: "discountCode") String? discountCode,
-      @JsonKey(name: "discountAmount") int? discountAmount});
+      @JsonKey(name: "paymentMethod") String? paymentMethod});
 
   @override
   $AddressCopyWith<$Res>? get deliveryAddress;
@@ -172,23 +145,16 @@ class __$$CreateOrderRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? productId = freezed,
-    Object? quantity = freezed,
+    Object? orderItems = freezed,
     Object? deliveryAddress = freezed,
     Object? billingAddress = freezed,
     Object? paymentMethod = freezed,
-    Object? discountCode = freezed,
-    Object? discountAmount = freezed,
   }) {
     return _then(_$CreateOrderRequestImpl(
-      productId: freezed == productId
-          ? _value.productId
-          : productId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      quantity: freezed == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int?,
+      orderItems: freezed == orderItems
+          ? _value._orderItems
+          : orderItems // ignore: cast_nullable_to_non_nullable
+              as List<OrderItem>?,
       deliveryAddress: freezed == deliveryAddress
           ? _value.deliveryAddress
           : deliveryAddress // ignore: cast_nullable_to_non_nullable
@@ -201,14 +167,6 @@ class __$$CreateOrderRequestImplCopyWithImpl<$Res>
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
               as String?,
-      discountCode: freezed == discountCode
-          ? _value.discountCode
-          : discountCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      discountAmount: freezed == discountAmount
-          ? _value.discountAmount
-          : discountAmount // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -217,23 +175,26 @@ class __$$CreateOrderRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CreateOrderRequestImpl implements _CreateOrderRequest {
   const _$CreateOrderRequestImpl(
-      {@JsonKey(name: "product_id") this.productId,
-      @JsonKey(name: "quantity") this.quantity,
+      {@JsonKey(name: "orderItems") final List<OrderItem>? orderItems,
       @JsonKey(name: "deliveryAddress") this.deliveryAddress,
       @JsonKey(name: "billingAddress") this.billingAddress,
-      @JsonKey(name: "paymentMethod") this.paymentMethod,
-      @JsonKey(name: "discountCode") this.discountCode,
-      @JsonKey(name: "discountAmount") this.discountAmount});
+      @JsonKey(name: "paymentMethod") this.paymentMethod})
+      : _orderItems = orderItems;
 
   factory _$CreateOrderRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$CreateOrderRequestImplFromJson(json);
 
+  final List<OrderItem>? _orderItems;
   @override
-  @JsonKey(name: "product_id")
-  final String? productId;
-  @override
-  @JsonKey(name: "quantity")
-  final int? quantity;
+  @JsonKey(name: "orderItems")
+  List<OrderItem>? get orderItems {
+    final value = _orderItems;
+    if (value == null) return null;
+    if (_orderItems is EqualUnmodifiableListView) return _orderItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey(name: "deliveryAddress")
   final Address? deliveryAddress;
@@ -243,16 +204,10 @@ class _$CreateOrderRequestImpl implements _CreateOrderRequest {
   @override
   @JsonKey(name: "paymentMethod")
   final String? paymentMethod;
-  @override
-  @JsonKey(name: "discountCode")
-  final String? discountCode;
-  @override
-  @JsonKey(name: "discountAmount")
-  final int? discountAmount;
 
   @override
   String toString() {
-    return 'CreateOrderRequest(productId: $productId, quantity: $quantity, deliveryAddress: $deliveryAddress, billingAddress: $billingAddress, paymentMethod: $paymentMethod, discountCode: $discountCode, discountAmount: $discountAmount)';
+    return 'CreateOrderRequest(orderItems: $orderItems, deliveryAddress: $deliveryAddress, billingAddress: $billingAddress, paymentMethod: $paymentMethod)';
   }
 
   @override
@@ -260,33 +215,24 @@ class _$CreateOrderRequestImpl implements _CreateOrderRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateOrderRequestImpl &&
-            (identical(other.productId, productId) ||
-                other.productId == productId) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
+            const DeepCollectionEquality()
+                .equals(other._orderItems, _orderItems) &&
             (identical(other.deliveryAddress, deliveryAddress) ||
                 other.deliveryAddress == deliveryAddress) &&
             (identical(other.billingAddress, billingAddress) ||
                 other.billingAddress == billingAddress) &&
             (identical(other.paymentMethod, paymentMethod) ||
-                other.paymentMethod == paymentMethod) &&
-            (identical(other.discountCode, discountCode) ||
-                other.discountCode == discountCode) &&
-            (identical(other.discountAmount, discountAmount) ||
-                other.discountAmount == discountAmount));
+                other.paymentMethod == paymentMethod));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      productId,
-      quantity,
+      const DeepCollectionEquality().hash(_orderItems),
       deliveryAddress,
       billingAddress,
-      paymentMethod,
-      discountCode,
-      discountAmount);
+      paymentMethod);
 
   @JsonKey(ignore: true)
   @override
@@ -305,24 +251,18 @@ class _$CreateOrderRequestImpl implements _CreateOrderRequest {
 
 abstract class _CreateOrderRequest implements CreateOrderRequest {
   const factory _CreateOrderRequest(
-          {@JsonKey(name: "product_id") final String? productId,
-          @JsonKey(name: "quantity") final int? quantity,
+          {@JsonKey(name: "orderItems") final List<OrderItem>? orderItems,
           @JsonKey(name: "deliveryAddress") final Address? deliveryAddress,
           @JsonKey(name: "billingAddress") final Address? billingAddress,
-          @JsonKey(name: "paymentMethod") final String? paymentMethod,
-          @JsonKey(name: "discountCode") final String? discountCode,
-          @JsonKey(name: "discountAmount") final int? discountAmount}) =
+          @JsonKey(name: "paymentMethod") final String? paymentMethod}) =
       _$CreateOrderRequestImpl;
 
   factory _CreateOrderRequest.fromJson(Map<String, dynamic> json) =
       _$CreateOrderRequestImpl.fromJson;
 
   @override
-  @JsonKey(name: "product_id")
-  String? get productId;
-  @override
-  @JsonKey(name: "quantity")
-  int? get quantity;
+  @JsonKey(name: "orderItems")
+  List<OrderItem>? get orderItems;
   @override
   @JsonKey(name: "deliveryAddress")
   Address? get deliveryAddress;
@@ -332,12 +272,6 @@ abstract class _CreateOrderRequest implements CreateOrderRequest {
   @override
   @JsonKey(name: "paymentMethod")
   String? get paymentMethod;
-  @override
-  @JsonKey(name: "discountCode")
-  String? get discountCode;
-  @override
-  @JsonKey(name: "discountAmount")
-  int? get discountAmount;
   @override
   @JsonKey(ignore: true)
   _$$CreateOrderRequestImplCopyWith<_$CreateOrderRequestImpl> get copyWith =>
@@ -573,5 +507,172 @@ abstract class _Address implements Address {
   @override
   @JsonKey(ignore: true)
   _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+OrderItem _$OrderItemFromJson(Map<String, dynamic> json) {
+  return _OrderItem.fromJson(json);
+}
+
+/// @nodoc
+mixin _$OrderItem {
+  @JsonKey(name: "product_id")
+  String? get productId => throw _privateConstructorUsedError;
+  @JsonKey(name: "quantity")
+  int? get quantity => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OrderItemCopyWith<OrderItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OrderItemCopyWith<$Res> {
+  factory $OrderItemCopyWith(OrderItem value, $Res Function(OrderItem) then) =
+      _$OrderItemCopyWithImpl<$Res, OrderItem>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "product_id") String? productId,
+      @JsonKey(name: "quantity") int? quantity});
+}
+
+/// @nodoc
+class _$OrderItemCopyWithImpl<$Res, $Val extends OrderItem>
+    implements $OrderItemCopyWith<$Res> {
+  _$OrderItemCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? productId = freezed,
+    Object? quantity = freezed,
+  }) {
+    return _then(_value.copyWith(
+      productId: freezed == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quantity: freezed == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$OrderItemImplCopyWith<$Res>
+    implements $OrderItemCopyWith<$Res> {
+  factory _$$OrderItemImplCopyWith(
+          _$OrderItemImpl value, $Res Function(_$OrderItemImpl) then) =
+      __$$OrderItemImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "product_id") String? productId,
+      @JsonKey(name: "quantity") int? quantity});
+}
+
+/// @nodoc
+class __$$OrderItemImplCopyWithImpl<$Res>
+    extends _$OrderItemCopyWithImpl<$Res, _$OrderItemImpl>
+    implements _$$OrderItemImplCopyWith<$Res> {
+  __$$OrderItemImplCopyWithImpl(
+      _$OrderItemImpl _value, $Res Function(_$OrderItemImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? productId = freezed,
+    Object? quantity = freezed,
+  }) {
+    return _then(_$OrderItemImpl(
+      productId: freezed == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quantity: freezed == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$OrderItemImpl implements _OrderItem {
+  const _$OrderItemImpl(
+      {@JsonKey(name: "product_id") this.productId,
+      @JsonKey(name: "quantity") this.quantity});
+
+  factory _$OrderItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderItemImplFromJson(json);
+
+  @override
+  @JsonKey(name: "product_id")
+  final String? productId;
+  @override
+  @JsonKey(name: "quantity")
+  final int? quantity;
+
+  @override
+  String toString() {
+    return 'OrderItem(productId: $productId, quantity: $quantity)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OrderItemImpl &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, productId, quantity);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OrderItemImplCopyWith<_$OrderItemImpl> get copyWith =>
+      __$$OrderItemImplCopyWithImpl<_$OrderItemImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$OrderItemImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _OrderItem implements OrderItem {
+  const factory _OrderItem(
+      {@JsonKey(name: "product_id") final String? productId,
+      @JsonKey(name: "quantity") final int? quantity}) = _$OrderItemImpl;
+
+  factory _OrderItem.fromJson(Map<String, dynamic> json) =
+      _$OrderItemImpl.fromJson;
+
+  @override
+  @JsonKey(name: "product_id")
+  String? get productId;
+  @override
+  @JsonKey(name: "quantity")
+  int? get quantity;
+  @override
+  @JsonKey(ignore: true)
+  _$$OrderItemImplCopyWith<_$OrderItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

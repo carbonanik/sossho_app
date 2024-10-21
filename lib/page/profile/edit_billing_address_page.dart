@@ -6,9 +6,9 @@ import 'package:sossho_app/providers/billing_address_provider.dart';
 import 'package:sossho_app/utils/error_as_value.dart';
 import 'package:sossho_app/utils/validator.dart';
 
-import '../utils/show_snack_bar.dart';
-import '../widgets/add_text_field.dart';
-import '../widgets/app_button.dart';
+import '../../utils/show_snack_bar.dart';
+import '../../widgets/add_text_field.dart';
+import '../../widgets/app_button.dart';
 
 class EditBillingAddressPage extends ConsumerStatefulWidget {
   const EditBillingAddressPage({super.key});

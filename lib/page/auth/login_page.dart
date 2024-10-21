@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:sossho_app/page/auth/forgot_password_page.dart';
-import 'package:sossho_app/page/main_tabs.dart';
+import 'package:sossho_app/page/home/main_tabs.dart';
 import 'package:sossho_app/page/auth/sign_up_page.dart';
 import 'package:sossho_app/utils/navigation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,7 +48,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       if (next != null) {
         showSnackBar(
           context,
-          (next as DioException).response?.data?.toString() ?? '',
+          (next as Map)['message'].toString(),
           Colors.redAccent,
         );
       }
@@ -116,7 +116,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           children: [
                             InkWell(
                               onTap: () {
-                                context.push(ForgotPasswordPage());
+                                context.push(const ForgotPasswordPage());
                               },
                               customBorder: const StadiumBorder(),
                               child: const Align(
@@ -132,6 +132,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         const SizedBox(height: 16.0),
                         AppButton(
                           onPressed: () {
+                            print('pressed');
                             if (formKey.currentState!.validate()) {
                               ref.read(loginProvider.notifier).login(
                                     email: _emailController.text,

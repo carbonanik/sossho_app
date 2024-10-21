@@ -1,22 +1,34 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sossho_app/model/create_order_request.dart';
 import 'package:sossho_app/page/checkout_page.dart';
-import 'package:sossho_app/page/my_order_page.dart';
 import 'package:sossho_app/providers/api_provider.dart';
 import 'package:sossho_app/utils/error_as_value.dart';
 import 'package:sossho_app/utils/navigation.dart';
 import 'package:sossho_app/utils/show_snack_bar.dart';
 import 'package:sossho_app/widgets/app_button.dart';
 
+import '../model/get_cart_response.dart';
 import '../providers/cart_provider.dart';
-import '../utils/colors.dart';
 import '../widgets/cart_list_item.dart';
 
-class MyCartPage extends StatelessWidget {
+class MyCartPage extends StatefulWidget {
   const MyCartPage({super.key});
+
+  @override
+  State<MyCartPage> createState() => _MyCartPageState();
+}
+
+class _MyCartPageState extends State<MyCartPage> {
+  final List<Cart> selectedItems = [];
+  final couponController = TextEditingController();
+  int couponDiscount = 0;
+  int totalPrice = 0;
+
+  @override
+  void dispose() {
+    couponController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +62,8 @@ class MyCartPage extends StatelessWidget {
             children: [
               const SizedBox(height: 12),
               Consumer(builder: (context, ref, child) {
-                final cart = ref.watch(cartProvider);
-                final totalPrice = cart.valueOrNull?.cart?.fold(
-                      0.0,
-                      (previousValue, element) {
-                        final cartItemPrice =
-                            double.parse(element.product?.price ?? '0.0') *
-                                double.parse(element.quantity ?? '0.0');
-                        return previousValue + cartItemPrice;
-                      },
-                    ) ??
-                    0;
+                final cart = ref.watch(shoppingCartProvider);
+
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -105,9 +108,9 @@ class MyCartPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    const Row(
+                    Row(
                       children: [
-                        Text(
+                        const Text(
                           'Discount',
                           style: TextStyle(
                             fontWeight: FontWeight.w300,
@@ -115,10 +118,10 @@ class MyCartPage extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
-                          '100 ৳',
-                          style: TextStyle(
+                          '$couponDiscount ৳',
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.white,
                           ),
@@ -128,9 +131,10 @@ class MyCartPage extends StatelessWidget {
                     const SizedBox(height: 12),
                     Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: TextField(
-                            decoration: InputDecoration(
+                            controller: couponController,
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Coupon code',
                               hintStyle: TextStyle(
@@ -143,19 +147,46 @@ class MyCartPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 11),
-                          //edgeInsets from textfiela
-                          decoration: const BoxDecoration(
-                            color: Colors.white12,
-                          ),
-                          child: const Text(
-                            'Apply',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                              color: Colors.white,
+                        GestureDetector(
+                          onTap: () async {
+                            final api =
+                                await ref.read(secureApiProvider.future);
+                            final res = await (api
+                                .applyPromo(
+                                  code: couponController.text,
+                                  totalOrderValue: totalPrice.toInt(),
+                                )
+                                .errorAsValue());
+
+                            if (res.hasError) {
+                              if (!context.mounted) return;
+                              showSnackBar(context, res.error.toString(),
+                                  Colors.redAccent);
+                              return;
+                            }
+                            setState(() {
+                              couponDiscount =
+                                  res.valueOrNull?['discount'] ?? 0;
+                            });
+
+                            if (!context.mounted) return;
+                            showSnackBar(context, 'Coupon applied successfully',
+                                Colors.green);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 11),
+                            //edgeInsets from textfiela
+                            decoration: const BoxDecoration(
+                              color: Colors.white12,
+                            ),
+                            child: const Text(
+                              'Apply',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -189,6 +220,20 @@ class MyCartPage extends StatelessWidget {
               }),
 
               /// Continue to pay button
+              Consumer(
+                builder: (context, ref, child) {
+                  return AppButton(
+                    onPressed: () async {
+                      context.push(
+                        CheckoutPage(
+                          selectedItems: selectedItems,
+                        ),
+                      );
+                    },
+                    child: const Text('Proceed to Checkout'),
+                  );
+                },
+              ),
               Consumer(builder: (context, ref, child) {
                 return AppButton(
                   onPressed: () async {
@@ -208,11 +253,10 @@ class MyCartPage extends StatelessWidget {
   Widget _buildCartList() {
     return Consumer(
       builder: (context, ref, child) {
-        final cart = ref.watch(cartProvider);
+        final cart = ref.watch(shoppingCartProvider);
         final isNotEmpty = cart.valueOrNull?.cart?.isNotEmpty == true;
         return isNotEmpty
             ? SliverList.builder(
-                // physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   final item = cart.valueOrNull!
                       .cart![index % (cart.valueOrNull?.cart?.length ?? 0)];
@@ -220,21 +264,59 @@ class MyCartPage extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
                     child: CartListItem(
+                      selected: selectedItems.contains(item),
+                      onSelect: (value) {
+                        if (value == true) {
+                          selectedItems.add(item);
+                          final cartItemPrice =
+                              double.parse(item.product?.price ?? '0.0') *
+                                  double.parse(item.quantity ?? '0.0');
+                          totalPrice += cartItemPrice.toInt();
+                        } else {
+                          selectedItems.remove(item);
+                          final cartItemPrice =
+                              double.parse(item.product?.price ?? '0.0') *
+                                  double.parse(item.quantity ?? '0.0');
+                          totalPrice -= cartItemPrice.toInt();
+                        }
+                        // totalPrice = selectedItems.fold(
+                        //   0,
+                        //       (previousValue, element) {
+                        //     final cartItemPrice =
+                        //         int.parse(element.product?.price ?? '0') *
+                        //             int.parse(element.quantity ?? '0');
+                        //     return cartItemPrice + (previousValue ?? 0);
+                        //   },
+                        // ) ??
+                        //     0;
+                        // setState(() {});
+                        // totalPrice = 0;
+                        // for (var element in selectedItems) {
+                        //   final cartItemPrice =
+                        //       int.parse(element.product?.price ?? '0') *
+                        //           int.parse(element.quantity ?? '0');
+                        //   totalPrice += cartItemPrice;
+                        // }
+                        // _calculateTotalPrice();
+                        setState(() {});
+                      },
                       item: item,
                       onAdd: (id) {
                         ref
-                            .read(cartProvider.notifier)
+                            .read(shoppingCartProvider.notifier)
                             .addToCart(productId: id, quantity: 1);
                       },
                       onRemove: (id) {
                         if (quantity > 1) {
                           ref
-                              .read(cartProvider.notifier)
+                              .read(shoppingCartProvider.notifier)
                               .addToCart(productId: id, quantity: -1);
                         }
                       },
                       onDelete: (id) {
-                        ref.read(cartProvider.notifier).deleteCart(cartId: id);
+                        ref
+                            .read(shoppingCartProvider.notifier)
+                            .deleteCart(cartId: id);
                       },
                     ),
                   );
@@ -247,5 +329,14 @@ class MyCartPage extends StatelessWidget {
               );
       },
     );
+  }
+
+  _calculateTotalPrice() {
+    totalPrice = 0;
+    for (var element in selectedItems) {
+      final cartItemPrice = int.parse(element.product?.price ?? '0') *
+          int.parse(element.quantity ?? '0');
+      totalPrice += cartItemPrice;
+    }
   }
 }

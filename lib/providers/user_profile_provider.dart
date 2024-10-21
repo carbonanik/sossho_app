@@ -27,3 +27,10 @@ class UserProfile extends _$UserProfile {
     ref.invalidateSelf();
   }
 }
+
+@riverpod
+Future<bool> isLoggedIn(IsLoggedInRef ref) async {
+  final api = await ref.read(secureApiProvider.future);
+  final response = await api.getProfile().errorAsValue();
+  return response is AsyncData && response.value != null;
+}

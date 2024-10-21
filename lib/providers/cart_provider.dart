@@ -7,7 +7,7 @@ import '../model/get_cart_response.dart';
 part 'cart_provider.g.dart';
 
 @riverpod
-class Cart extends _$Cart {
+class ShoppingCart extends _$ShoppingCart {
   @override
   Future<GetCartResponse> build() async {
     final api = await ref.read(secureApiProvider.future).errorAsValue();
@@ -49,7 +49,7 @@ class Cart extends _$Cart {
 
 @riverpod
 bool cartContains(CartContainsRef ref, {required String productId}) {
-  final cart = ref.watch(cartProvider);
+  final cart = ref.watch(shoppingCartProvider);
   final items = cart.valueOrNull?.cart ?? [];
 
   if (items.where(

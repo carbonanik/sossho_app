@@ -4,8 +4,11 @@ import 'package:sossho_app/model/create_order_request.dart';
 import 'package:sossho_app/model/get_billing_address_response.dart';
 import 'package:sossho_app/model/get_cart_response.dart';
 import 'package:sossho_app/model/get_categories_response.dart';
+import 'package:sossho_app/model/get_order_response.dart';
+import 'package:sossho_app/model/get_reviews_response.dart';
 import 'package:sossho_app/model/profile_update_request.dart';
 import 'package:sossho_app/model/update_billing_address.request.dart';
+import 'package:sossho_app/model/user_response.dart';
 
 import '../model/get_profile_response.dart';
 import 'dio_client.dart';
@@ -202,7 +205,7 @@ class SecureApi {
   Future changePassword({
     required String oldPassword,
     required String newPassword,
-}) async {
+  }) async {
     return _client.request(
       path: Links.changePassword,
       method: MethodType.put,
@@ -212,6 +215,52 @@ class SecureApi {
       },
       parse: (data) => data,
     );
+  }
 
+  Future applyPromo({
+    required int totalOrderValue,
+    required String code,
+  }) {
+    return _client.request(
+      path: Links.applyPromo,
+      method: MethodType.post,
+      // parse: (data) => data,
+      payload: {
+        "total_order_value": totalOrderValue,
+        "code": code,
+      },
+    );
+  }
+
+  Future<List<GetOrdersResponse>> getAllOrder() {
+    return _client.request(
+      path: Links.order,
+      method: MethodType.get,
+      parseList: (json) {
+        return json.map(
+          (e) {
+            return GetOrdersResponse.fromJson(e);
+          },
+        ).toList();
+      },
+    );
+  }
+
+  Future<List<Review>> getReviews() {
+    return _client.request(
+      path: Links.review,
+      method: MethodType.get,
+      parseList: (json) {
+        return json.map((e) => Review.fromJson(e)).toList();
+      },
+    );
+  }
+
+  Future<User> getUserByID({required String id}) {
+    return _client.request(
+      path: '${Links.user}/$id',
+      method: MethodType.get,
+      parse: User.fromJson,
+    );
   }
 }

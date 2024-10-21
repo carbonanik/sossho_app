@@ -48,7 +48,7 @@ final loginSuccessProvider = AutoDisposeProvider<Object?>.internal(
 );
 
 typedef LoginSuccessRef = AutoDisposeProviderRef<Object?>;
-String _$loginHash() => r'14e9a978b106282781275062e45cf914173a6f93';
+String _$loginHash() => r'0b9364dfd8cd9709e5d47d558876f12bfef73c0c';
 
 /// See also [Login].
 @ProviderFor(Login)

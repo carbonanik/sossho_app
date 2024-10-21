@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sossho_app/model/public_product_response.dart';
 import 'package:sossho_app/utils/colors.dart';
 
+import '../model/product.dart';
 import '../widgets/product_grid_item.dart';
 
 class FavoritesPage extends StatefulWidget {

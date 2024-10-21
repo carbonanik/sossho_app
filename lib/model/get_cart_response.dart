@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sossho_app/model/public_product_response.dart';
+import 'package:sossho_app/model/product.dart';
 
 part 'get_cart_response.freezed.dart';
 

@@ -10,19 +10,25 @@ class CartListItem extends StatelessWidget {
     required this.onAdd,
     required this.onRemove,
     required this.onDelete,
+    required this.selected,
+    required this.onSelect,
   });
 
   final Cart item;
   final Function(String productId) onAdd;
   final Function(String productId) onRemove;
   final Function(String cartId) onDelete;
+  final bool selected;
+  final void Function(bool? value) onSelect;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 10,
+      padding: const EdgeInsets.only(
+        top: 10,
+        bottom: 10,
+        left: 0,
+        right: 10,
       ),
       // margin: EdgeInsets.only(bottom: (10)),
       decoration: BoxDecoration(
@@ -31,6 +37,11 @@ class CartListItem extends StatelessWidget {
       ),
       child: Row(
         children: [
+          //checkbox
+          Checkbox(
+            value: selected,
+            onChanged: onSelect,
+          ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular((6)),

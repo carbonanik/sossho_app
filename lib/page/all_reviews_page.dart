@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sossho_app/page/leave_review.dart';
+import 'package:sossho_app/providers/review_provider.dart';
+import 'package:sossho_app/providers/user_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
 import 'package:sossho_app/widgets/app_button.dart';
 
+import '../model/get_reviews_response.dart';
 import '../widgets/common_app_bar.dart';
 
 class AllReviewsPage extends StatelessWidget {
@@ -39,7 +43,11 @@ class AllReviewsPage extends StatelessWidget {
                                   ),
                               ],
                             ),
-                            const Text('107 Reviews'),
+                            Consumer(builder: (context, ref, child) {
+                              final reviews = ref.watch(getReviewsProvider);
+                              return  Text('${reviews.value?.length ?? 0} Reviews');
+
+                            }),
                           ],
                         ),
                       ),
@@ -100,12 +108,16 @@ class AllReviewsPage extends StatelessWidget {
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => const ReviewCard(),
-                    childCount: 10,
-                  ),
-                ),
+                Consumer(builder: (context, ref, child) {
+                  final reviews = ref.watch(getReviewsProvider);
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                          ReviewCard(review: reviews.value![index]),
+                      childCount: reviews.value?.length ?? 0,
+                    ),
+                  );
+                }),
               ],
             ),
           ),
@@ -151,37 +163,54 @@ class AllReviewsPage extends StatelessWidget {
 }
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({super.key});
+  final Review review;
+
+  const ReviewCard({
+    super.key,
+    required this.review,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               const CircleAvatar(
                 radius: 20,
                 backgroundImage: NetworkImage(
-                    'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200&d=mp'),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                'John Doe',
-                style: TextStyle(
-                  color: Colors.grey.shade600,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
                 ),
               ),
+              const SizedBox(width: 10),
+              Consumer(builder: (context, ref, child) {
+                final user =
+                    ref.watch(getUserByIdProvider(id: review.userId ?? ''));
+                return Text(
+                  user.value?.fullName ?? '',
+                  style: TextStyle(
+                    color: Colors.grey.shade600,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                );
+              }),
               const Spacer(),
-              const Text('5 hours ago'),
+              Text(
+                '${review.createdAt?.day}/'
+                '${review.createdAt?.month}/'
+                '${review.createdAt?.year} '
+                '${review.createdAt?.hour}:'
+                '${review.createdAt?.minute}',
+              ),
             ],
           ),
           const SizedBox(height: 8),
           Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            review.message ?? '',
             style: TextStyle(color: Colors.grey.shade600),
           ),
           const SizedBox(height: 8),
@@ -192,7 +221,7 @@ class ReviewCard extends StatelessWidget {
                   Icons.star,
                   color: Colors.amber,
                 ),
-              const Text('4.5'),
+              Text('${review.reviewStar}/5'),
               const Spacer(),
               TextButton(
                 onPressed: () {},
