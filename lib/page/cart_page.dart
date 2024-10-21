@@ -192,8 +192,7 @@ class MyCartPage extends StatelessWidget {
               Consumer(builder: (context, ref, child) {
                 return AppButton(
                   onPressed: () async {
-                   // context.push(CheckoutPage());
-
+                    context.push(CheckoutPage());
                   },
                   child: const Text('Proceed to Checkout'),
                 );
