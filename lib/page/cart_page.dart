@@ -234,6 +234,15 @@ class _MyCartPageState extends State<MyCartPage> {
                   );
                 },
               ),
+              Consumer(builder: (context, ref, child) {
+                return AppButton(
+                  onPressed: () async {
+                   // context.push(CheckoutPage());
+
+                  },
+                  child: const Text('Proceed to Checkout'),
+                );
+              }),
               const SizedBox(height: 12),
             ],
           ),
