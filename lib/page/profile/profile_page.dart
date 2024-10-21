@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sossho_app/page/profile_settings_page.dart';
-import 'package:sossho_app/page/view_billing_address_page.dart';
-import 'package:sossho_app/page/view_delivery_address_page.dart';
+import 'package:sossho_app/page/profile/profile_settings_page.dart';
+import 'package:sossho_app/page/profile/view_billing_address_page.dart';
+import 'package:sossho_app/page/profile/view_delivery_address_page.dart';
 import 'package:sossho_app/utils/navigation.dart';
+import 'package:sossho_app/widgets/auth_check.dart';
 
-import '../backend/auth_persist_data.dart';
-import '../backend/links.dart';
-import '../providers/user_profile_provider.dart';
-import '../widgets/app_button.dart';
-import 'auth/login_page.dart';
+import '../../backend/auth_persist_data.dart';
+import '../../backend/links.dart';
+import '../../providers/user_profile_provider.dart';
+import '../../widgets/app_button.dart';
+import '../auth/login_page.dart';
 import 'change_password_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -21,39 +22,43 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Profile'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 16),
-                    _buildProfileView(),
-                    const SizedBox(height: 40),
-                    const Text("User Profile"),
-                    const SizedBox(height: 16),
-                    _buildProfileSettingButton(context),
-                    const SizedBox(height: 24),
-                    const Text("Other Settings"),
-                    const SizedBox(height: 16),
-                    _buildDeliveryAddress(context),
-                    const SizedBox(height: 16),
-                    _buildBillingAddress(context),
-                    const SizedBox(height: 16),
-                    _buildChangePassword(context),
-                    const SizedBox(height: 24),
-                    _buildLogoutButton(context),
-                    const SizedBox(height: 100),
-                  ],
-                ),
+      body: AuthCheck(child: _buildPage(context)),
+    );
+  }
+
+  Padding _buildPage(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+                  _buildProfileView(),
+                  const SizedBox(height: 40),
+                  const Text("User Profile"),
+                  const SizedBox(height: 16),
+                  _buildProfileSettingButton(context),
+                  const SizedBox(height: 24),
+                  const Text("Other Settings"),
+                  const SizedBox(height: 16),
+                  _buildDeliveryAddress(context),
+                  const SizedBox(height: 16),
+                  _buildBillingAddress(context),
+                  const SizedBox(height: 16),
+                  _buildChangePassword(context),
+                  const SizedBox(height: 24),
+                  _buildLogoutButton(context),
+                  const SizedBox(height: 100),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

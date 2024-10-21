@@ -6,7 +6,7 @@ part of 'cart_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cartContainsHash() => r'4aa011456ebc6ed141a8833df3ec5a4ffffa8424';
+String _$cartContainsHash() => r'695a8220c09d9138a01d05878547923cd6594218';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -155,20 +155,20 @@ class _CartContainsProviderElement extends AutoDisposeProviderElement<bool>
   String get productId => (origin as CartContainsProvider).productId;
 }
 
-String _$cartHash() => r'8b71b69b18cc6675424b345e0ee260898d556371';
+String _$shoppingCartHash() => r'fd64193faa7a6eb0ac3bb47a0cb5a8a15aab8d2f';
 
-/// See also [Cart].
-@ProviderFor(Cart)
-final cartProvider =
-    AutoDisposeAsyncNotifierProvider<Cart, GetCartResponse>.internal(
-  Cart.new,
-  name: r'cartProvider',
+/// See also [ShoppingCart].
+@ProviderFor(ShoppingCart)
+final shoppingCartProvider =
+    AutoDisposeAsyncNotifierProvider<ShoppingCart, GetCartResponse>.internal(
+  ShoppingCart.new,
+  name: r'shoppingCartProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$cartHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$shoppingCartHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Cart = AutoDisposeAsyncNotifier<GetCartResponse>;
+typedef _$ShoppingCart = AutoDisposeAsyncNotifier<GetCartResponse>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

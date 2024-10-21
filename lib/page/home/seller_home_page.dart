@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sossho_app/page/product_detail_page.dart';
+import 'package:sossho_app/model/get_reviews_response.dart';
+import 'package:sossho_app/page/home/product_detail_page.dart';
 import 'package:sossho_app/utils/navigation.dart';
 
-import '../providers/public_product_provider.dart';
-import '../widgets/product_grid_item.dart';
-import 'all_reviews_page.dart';
+import '../../providers/public_product_provider.dart';
+import '../../widgets/product_grid_item.dart';
+import '../all_reviews_page.dart';
 
 class SellerHomePage extends StatefulWidget {
   const SellerHomePage({super.key});
@@ -17,7 +18,7 @@ class SellerHomePage extends StatefulWidget {
 class _SellerHomePageState extends State<SellerHomePage>
     with TickerProviderStateMixin {
   late final TabController _tabController =
-      TabController(length: 3, vsync: this);
+      TabController(length: 2, vsync: this);
 
   @override
   void dispose() {
@@ -174,7 +175,7 @@ class _SellerHomePageState extends State<SellerHomePage>
                     const SliverToBoxAdapter(child: SizedBox(height: 20)),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
-                        (context, index) => const ReviewCard(),
+                        (context, index) => const ReviewCard(review: Review(),),
                         childCount: 10,
                       ),
                     ),

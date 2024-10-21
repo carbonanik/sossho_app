@@ -1,7 +1,4 @@
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:sossho_app/backend/links.dart';
 import 'api_client.dart';
 import 'method_types.dart';
 
@@ -14,11 +11,9 @@ class DioClient implements ApiClient {
     _client = Dio()
           ..options.baseUrl = baseUrl
           // ..interceptors.add(CookieManager(cookieJar))
-          // ..interceptors.add(
-          //   LogInterceptor(responseBody: true, requestBody: true),
-          // )
-        //
-        ;
+          ..interceptors.add(
+        LogInterceptor(responseBody: true, requestBody: true),
+      );
   }
 
   @override

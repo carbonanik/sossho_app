@@ -8,9 +8,10 @@ import 'package:sossho_app/providers/cart_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
 import 'package:sossho_app/widgets/app_button.dart';
 
-import '../model/public_product_response.dart';
-import '../utils/colors.dart';
-import '../widgets/common_app_bar.dart';
+import '../../model/product.dart';
+import '../../model/public_product_response.dart';
+import '../../utils/colors.dart';
+import '../../widgets/common_app_bar.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key, required this.product});
@@ -121,27 +122,27 @@ class ProductDetailPage extends StatelessWidget {
                                   color: Colors.grey,
                                 ),
                               ),
-                              Text(
-                                ' (124 Reviews)',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                ),
-                              ),
+                              // Text(
+                              //   ' (124 Reviews)',
+                              //   style: TextStyle(
+                              //     fontSize: 16,
+                              //     color: Colors.grey,
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    InkWell(
-                      onTap: () {
-                        context.push(const AllReviewsPage());
-                      },
-                      child: const Icon(
-                        Icons.favorite,
-                        color: Colors.redAccent,
-                      ),
-                    )
+                    // InkWell(
+                    //   onTap: () {
+                    //     context.push(const AllReviewsPage());
+                    //   },
+                    //   child: const Icon(
+                    //     Icons.favorite,
+                    //     color: Colors.redAccent,
+                    //   ),
+                    // )
                   ],
                 ),
                 const SizedBox(height: 26),
@@ -252,7 +253,7 @@ class ProductDetailPage extends StatelessWidget {
                           return;
                         }
                         ref
-                            .read(cartProvider.notifier)
+                            .read(shoppingCartProvider.notifier)
                             .addToCart(productId: product.id!, quantity: 1);
                       },
                     );

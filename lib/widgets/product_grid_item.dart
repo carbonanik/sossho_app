@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sossho_app/model/public_product_response.dart';
 
+import '../model/product.dart';
+
 class ProductGridItem extends StatelessWidget {
   final Product product;
   final Function(Product product) onTap;
@@ -50,34 +52,34 @@ class ProductGridItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: InkWell(
-                    customBorder: const CircleBorder(),
-                    splashColor: Colors.green,
-                    onTap: () {
-                      // favorite
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 3,
-                            blurRadius: 4,
-                            offset: const Offset(
-                                0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: const Icon(Icons.favorite, color: Colors.red),
-                    ),
-                  ),
-                )
+                // Positioned(
+                //   top: 8,
+                //   right: 8,
+                //   child: InkWell(
+                //     customBorder: const CircleBorder(),
+                //     splashColor: Colors.green,
+                //     onTap: () {
+                //       // favorite
+                //     },
+                //     child: Container(
+                //       padding: const EdgeInsets.all(4),
+                //       decoration: BoxDecoration(
+                //         color: Colors.white,
+                //         borderRadius: BorderRadius.circular(20),
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.grey.withOpacity(0.2),
+                //             spreadRadius: 3,
+                //             blurRadius: 4,
+                //             offset: const Offset(
+                //                 0, 3), // changes position of shadow
+                //           ),
+                //         ],
+                //       ),
+                //       child: const Icon(Icons.favorite, color: Colors.red),
+                //     ),
+                //   ),
+                // )
               ],
             ),
             const SizedBox(height: 8),
@@ -86,17 +88,25 @@ class ProductGridItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    product.title ?? '',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                          product.title ?? '',
+                        child:   Text(
+                          '${product.price ?? ' '}' ' BDT',
                           style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const Icon(
@@ -114,14 +124,7 @@ class ProductGridItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${product.price ?? ' '}' ' BDT',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+
                 ],
               ),
             ),

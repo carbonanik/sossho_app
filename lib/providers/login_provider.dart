@@ -16,12 +16,12 @@ class Login extends _$Login {
   }) async {
     state = const AsyncLoading();
     final api = ref.read(publicApiProvider);
-    final res = await api
+    final res = await (api
         .login(
           email: email,
           password: password,
         )
-        .errorAsValue();
+        .errorAsValue());
     state = res;
     if (res.hasError) {
       return;

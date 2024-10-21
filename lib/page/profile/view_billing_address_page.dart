@@ -5,7 +5,7 @@ import 'package:sossho_app/utils/navigation.dart';
 import 'package:sossho_app/utils/show_snack_bar.dart';
 import 'package:sossho_app/widgets/app_button.dart';
 
-import '../providers/billing_address_provider.dart';
+import '../../providers/billing_address_provider.dart';
 import 'edit_billing_address_page.dart';
 
 class ViewBillingAddressPage extends StatefulWidget {

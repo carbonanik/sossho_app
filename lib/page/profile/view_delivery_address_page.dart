@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sossho_app/page/profile/edit_delivery_address_page.dart';
 import 'package:sossho_app/providers/delivery_address_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
 import 'package:sossho_app/widgets/app_button.dart';
 
-import '../utils/show_snack_bar.dart';
-import 'edit_delivery_address_page.dart';
+import '../../utils/show_snack_bar.dart';
 
 class ViewDeliveryAddressPage extends StatefulWidget {
   const ViewDeliveryAddressPage({super.key});

@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sossho_app/utils/error_as_value.dart';
 
-import '../model/profile_update_request.dart';
-import '../providers/user_profile_provider.dart';
-import '../utils/show_snack_bar.dart';
-import '../widgets/add_text_field.dart';
-import '../widgets/app_button.dart';
+import '../../model/profile_update_request.dart';
+import '../../providers/user_profile_provider.dart';
+import '../../utils/show_snack_bar.dart';
+import '../../widgets/add_text_field.dart';
+import '../../widgets/app_button.dart';
 
 class ProfileSettingsPage extends ConsumerStatefulWidget {
   const ProfileSettingsPage({super.key});

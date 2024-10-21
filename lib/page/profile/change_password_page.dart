@@ -3,10 +3,10 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sossho_app/utils/error_as_value.dart';
 import 'package:sossho_app/utils/show_snack_bar.dart';
-import '../../utils/validator.dart';
-import '../../widgets/add_password_field.dart';
-import '../../widgets/app_button.dart';
-import '../providers/api_provider.dart';
+import '../../../utils/validator.dart';
+import '../../../widgets/add_password_field.dart';
+import '../../../widgets/app_button.dart';
+import '../../providers/api_provider.dart';
 
 class ChangePasswordPage extends ConsumerStatefulWidget {
   const ChangePasswordPage({super.key});

@@ -1,5 +1,7 @@
 class Links {
-  static String baseUrl = "http://10.0.2.2:8000";
+  // static String baseUrl = "http://192.168.0.198:8000";
+
+  static String baseUrl = "https://e-api.sossho.com";
 
   static String login = '/api/v1/public/user/login';
 
@@ -11,7 +13,11 @@ class Links {
 
   static String productsPublic = '/api/v1/public/product';
 
+  static String homeProducts = '/api/v1/public/all-product';
+
   static String productsCategory = '/api/v1/public/product-category';
+
+  static String productBrand = '/api/v1/public/product-brand';
 
   // secure
   static String products = '/api/v1/secured/product';
@@ -29,4 +35,10 @@ class Links {
   static String order = '/api/v1/secured/orders';
 
   static String changePassword = '/api/v1/secured/change-password';
+
+  static String applyPromo = '/api/v1/secured/promo/apply';
+
+  static String review = '/api/v1/secured/reviews';
+
+  static String user = '/api/v1/secured/user';
 }
