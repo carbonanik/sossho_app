@@ -3,16 +3,16 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sossho_app/page/cart_page.dart';
+import 'package:sossho_app/page/home/search_list_page.dart';
 
-import 'package:sossho_app/page/product_detail_page.dart';
-import 'package:sossho_app/page/profile_page.dart';
-import 'package:sossho_app/page/search_list_page.dart';
+import 'package:sossho_app/page/profile/profile_page.dart';
 import 'package:sossho_app/providers/categories_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
 
 import '../providers/public_product_provider.dart';
 import '../utils/colors.dart';
 import '../widgets/product_grid_item.dart';
+import 'home/product_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
