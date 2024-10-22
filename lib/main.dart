@@ -28,12 +28,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Sossho',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-            seedColor: accentColor,
-            primary: accentColor,
+            seedColor: accentColor.withOpacity(0.1),
+            primary: accentColor.withOpacity(0.1),
           ),
           useMaterial3: true,
         ),

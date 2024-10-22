@@ -17,6 +17,7 @@ class ProductGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('the product image is ${product}');
     return InkWell(
       onTap: () => onTap(product),
       child: Container(
@@ -26,9 +27,9 @@ class ProductGridItem extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withOpacity(0.1),
               spreadRadius: 3,
-              blurRadius: 4,
+              blurRadius: 9,
               offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
@@ -50,7 +51,7 @@ class ProductGridItem extends StatelessWidget {
                       image: NetworkImage(
                         jsonDecode(product.images)?[0]?["image_path"] ?? "",
                       ),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
@@ -86,7 +87,7 @@ class ProductGridItem extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -117,9 +118,9 @@ class ProductGridItem extends StatelessWidget {
                         size: 16,
                       ),
                       const SizedBox(width: 4),
-                      const Text(
-                        '4.5',
-                        style: TextStyle(
+                      Text(
+                        product.rating.toString(),
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),

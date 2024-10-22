@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class ProductDetailPage extends StatelessWidget {
               width: double.infinity,
               height: 320,
               child: Image.network(
-                product.images?.firstOrNull ?? '',
+                jsonDecode(product.images)?[0]?["image_path"] ?? "",
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return const Icon(Icons.image);

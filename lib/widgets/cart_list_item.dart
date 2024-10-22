@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:sossho_app/model/get_cart_response.dart';
 
@@ -48,7 +50,8 @@ class CartListItem extends StatelessWidget {
             ),
             clipBehavior: Clip.antiAlias,
             child: Image.network(
-              item.product?.images?.firstOrNull ?? '',
+            //  item.product?.images?.firstOrNull ?? '',
+              jsonDecode(item.product!.images)?[0]?["image_path"] ?? "",
               height: (50),
               errorBuilder: (context, error, stackTrace) {
                 return const Icon(Icons.image);

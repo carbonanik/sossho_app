@@ -48,15 +48,11 @@ class _HomePageState extends State<HomePage> {
               _buildImageGallery(context, featuredImages),
               _sliverSpace(context: context, height: 40),
 
-              // Category Text
-              _buildSectionHeader(context, 'Category'),
-              //  _buildCategoryList(context),
-              _sliverSpace(context: context),
               // category list
               _buildCategoryList(context),
               _sliverSpace(context: context),
 
-              _buildSectionHeader(context, 'Popular Products'),
+              //_buildSectionHeader(context, 'Popular Products'),
               // _buildProductGrid(context, featuredImages),
               // _sliverSpace(context: context),
 
@@ -131,7 +127,6 @@ class _HomePageState extends State<HomePage> {
       child: Consumer(
         builder: (context, ref, child) {
           final categories = ref.watch(categoriesProvider);
-          print(" the item is here$categories");
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -187,21 +182,22 @@ class _HomePageState extends State<HomePage> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: .8,
+                    childAspectRatio: 0.721,
                   ),
                   itemBuilder: (context, index) {
                     final category = categories.value!.productCategory![index];
-                    print(" the category is here${category}");
+                    print('the category is $category');
                     return Container(
                       decoration: BoxDecoration(
-                        color: Colors.black,
+                        color: Colors.transparent.withOpacity(0.4),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
                             // padding: const EdgeInsets.all(10.0),
-                            width: 100,
+                            width: MediaQuery.of(context).size.width,
                             height: 60,
                             decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
@@ -215,11 +211,15 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          Text(
-                            category.title ?? 'Category Name',
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Text(
+                              category.title ?? 'Category Name',
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],

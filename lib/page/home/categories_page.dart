@@ -21,20 +21,23 @@ class CategoriesPage extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
                       childAspectRatio: 1,
                     ),
                     itemBuilder: (context, index) {
-                      final category = categories.value?.productCategory?[index];
+                      final category =
+                          categories.value?.productCategory?[index];
                       return Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: Colors.white
+                          color: Colors.transparent.withOpacity(0.4),
                         ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
                               child: Container(
@@ -52,16 +55,23 @@ class CategoriesPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 8,),
-                            Text(
-                              category?.title ?? 'Category Name',
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                category?.title ?? 'Category Name',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                            const SizedBox(height: 8,),
+                            const SizedBox(
+                              height: 8,
+                            ),
                           ],
                         ),
                       );
