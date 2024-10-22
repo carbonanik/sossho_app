@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         color: backgroundColor,
         child: Consumer(builder: (context, ref, child) {
           final homeProducts = ref.watch(homeProductsProvider);
-
+          print(homeProducts);
           return CustomScrollView(
             slivers: [
               /// top selector

@@ -19,14 +19,9 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       metaTitle: json['meta_title'] as String?,
       description: json['description'] as String?,
       metaDescription: json['meta_description'] as String?,
-      images:
-          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      mainFeature: (json['main_feature'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      productFaq: (json['product_faq'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      images: json['images'],
+      mainFeature: json['main_feature'],
+      productFaq: json['product_faq'],
       content: json['content'] as String?,
       status: json['status'] as String?,
       createdBy: json['created_by'] as String?,

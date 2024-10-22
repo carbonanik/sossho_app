@@ -43,11 +43,11 @@ mixin _$Product {
   @JsonKey(name: "meta_description")
   String? get metaDescription => throw _privateConstructorUsedError;
   @JsonKey(name: "images")
-  List<String>? get images => throw _privateConstructorUsedError;
+  dynamic get images => throw _privateConstructorUsedError;
   @JsonKey(name: "main_feature")
-  List<String>? get mainFeature => throw _privateConstructorUsedError;
+  dynamic get mainFeature => throw _privateConstructorUsedError;
   @JsonKey(name: "product_faq")
-  List<String>? get productFaq => throw _privateConstructorUsedError;
+  dynamic get productFaq => throw _privateConstructorUsedError;
   @JsonKey(name: "content")
   String? get content => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
@@ -87,9 +87,9 @@ abstract class $ProductCopyWith<$Res> {
       @JsonKey(name: "meta_title") String? metaTitle,
       @JsonKey(name: "description") String? description,
       @JsonKey(name: "meta_description") String? metaDescription,
-      @JsonKey(name: "images") List<String>? images,
-      @JsonKey(name: "main_feature") List<String>? mainFeature,
-      @JsonKey(name: "product_faq") List<String>? productFaq,
+      @JsonKey(name: "images") dynamic images,
+      @JsonKey(name: "main_feature") dynamic mainFeature,
+      @JsonKey(name: "product_faq") dynamic productFaq,
       @JsonKey(name: "content") String? content,
       @JsonKey(name: "status") String? status,
       @JsonKey(name: "created_by") String? createdBy,
@@ -184,15 +184,15 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       images: freezed == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as dynamic,
       mainFeature: freezed == mainFeature
           ? _value.mainFeature
           : mainFeature // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as dynamic,
       productFaq: freezed == productFaq
           ? _value.productFaq
           : productFaq // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as dynamic,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -248,9 +248,9 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       @JsonKey(name: "meta_title") String? metaTitle,
       @JsonKey(name: "description") String? description,
       @JsonKey(name: "meta_description") String? metaDescription,
-      @JsonKey(name: "images") List<String>? images,
-      @JsonKey(name: "main_feature") List<String>? mainFeature,
-      @JsonKey(name: "product_faq") List<String>? productFaq,
+      @JsonKey(name: "images") dynamic images,
+      @JsonKey(name: "main_feature") dynamic mainFeature,
+      @JsonKey(name: "product_faq") dynamic productFaq,
       @JsonKey(name: "content") String? content,
       @JsonKey(name: "status") String? status,
       @JsonKey(name: "created_by") String? createdBy,
@@ -341,17 +341,17 @@ class __$$ProductImplCopyWithImpl<$Res>
           : metaDescription // ignore: cast_nullable_to_non_nullable
               as String?,
       images: freezed == images
-          ? _value._images
+          ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as dynamic,
       mainFeature: freezed == mainFeature
-          ? _value._mainFeature
+          ? _value.mainFeature
           : mainFeature // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as dynamic,
       productFaq: freezed == productFaq
-          ? _value._productFaq
+          ? _value.productFaq
           : productFaq // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as dynamic,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -403,9 +403,9 @@ class _$ProductImpl implements _Product {
       @JsonKey(name: "meta_title") this.metaTitle,
       @JsonKey(name: "description") this.description,
       @JsonKey(name: "meta_description") this.metaDescription,
-      @JsonKey(name: "images") final List<String>? images,
-      @JsonKey(name: "main_feature") final List<String>? mainFeature,
-      @JsonKey(name: "product_faq") final List<String>? productFaq,
+      @JsonKey(name: "images") this.images,
+      @JsonKey(name: "main_feature") this.mainFeature,
+      @JsonKey(name: "product_faq") this.productFaq,
       @JsonKey(name: "content") this.content,
       @JsonKey(name: "status") this.status,
       @JsonKey(name: "created_by") this.createdBy,
@@ -413,10 +413,7 @@ class _$ProductImpl implements _Product {
       @JsonKey(name: "created_at") this.createdAt,
       @JsonKey(name: "updated_at") this.updatedAt,
       @JsonKey(name: "sales") this.sales,
-      @JsonKey(name: "rating") this.rating})
-      : _images = images,
-        _mainFeature = mainFeature,
-        _productFaq = productFaq;
+      @JsonKey(name: "rating") this.rating});
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductImplFromJson(json);
@@ -454,39 +451,15 @@ class _$ProductImpl implements _Product {
   @override
   @JsonKey(name: "meta_description")
   final String? metaDescription;
-  final List<String>? _images;
   @override
   @JsonKey(name: "images")
-  List<String>? get images {
-    final value = _images;
-    if (value == null) return null;
-    if (_images is EqualUnmodifiableListView) return _images;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<String>? _mainFeature;
+  final dynamic images;
   @override
   @JsonKey(name: "main_feature")
-  List<String>? get mainFeature {
-    final value = _mainFeature;
-    if (value == null) return null;
-    if (_mainFeature is EqualUnmodifiableListView) return _mainFeature;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<String>? _productFaq;
+  final dynamic mainFeature;
   @override
   @JsonKey(name: "product_faq")
-  List<String>? get productFaq {
-    final value = _productFaq;
-    if (value == null) return null;
-    if (_productFaq is EqualUnmodifiableListView) return _productFaq;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final dynamic productFaq;
   @override
   @JsonKey(name: "content")
   final String? content;
@@ -538,11 +511,11 @@ class _$ProductImpl implements _Product {
                 other.description == description) &&
             (identical(other.metaDescription, metaDescription) ||
                 other.metaDescription == metaDescription) &&
-            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other.images, images) &&
             const DeepCollectionEquality()
-                .equals(other._mainFeature, _mainFeature) &&
+                .equals(other.mainFeature, mainFeature) &&
             const DeepCollectionEquality()
-                .equals(other._productFaq, _productFaq) &&
+                .equals(other.productFaq, productFaq) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.createdBy, createdBy) ||
@@ -572,9 +545,9 @@ class _$ProductImpl implements _Product {
         metaTitle,
         description,
         metaDescription,
-        const DeepCollectionEquality().hash(_images),
-        const DeepCollectionEquality().hash(_mainFeature),
-        const DeepCollectionEquality().hash(_productFaq),
+        const DeepCollectionEquality().hash(images),
+        const DeepCollectionEquality().hash(mainFeature),
+        const DeepCollectionEquality().hash(productFaq),
         content,
         status,
         createdBy,
@@ -612,9 +585,9 @@ abstract class _Product implements Product {
       @JsonKey(name: "meta_title") final String? metaTitle,
       @JsonKey(name: "description") final String? description,
       @JsonKey(name: "meta_description") final String? metaDescription,
-      @JsonKey(name: "images") final List<String>? images,
-      @JsonKey(name: "main_feature") final List<String>? mainFeature,
-      @JsonKey(name: "product_faq") final List<String>? productFaq,
+      @JsonKey(name: "images") final dynamic images,
+      @JsonKey(name: "main_feature") final dynamic mainFeature,
+      @JsonKey(name: "product_faq") final dynamic productFaq,
       @JsonKey(name: "content") final String? content,
       @JsonKey(name: "status") final String? status,
       @JsonKey(name: "created_by") final String? createdBy,
@@ -661,13 +634,13 @@ abstract class _Product implements Product {
   String? get metaDescription;
   @override
   @JsonKey(name: "images")
-  List<String>? get images;
+  dynamic get images;
   @override
   @JsonKey(name: "main_feature")
-  List<String>? get mainFeature;
+  dynamic get mainFeature;
   @override
   @JsonKey(name: "product_faq")
-  List<String>? get productFaq;
+  dynamic get productFaq;
   @override
   @JsonKey(name: "content")
   String? get content;

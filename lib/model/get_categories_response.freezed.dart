@@ -475,7 +475,7 @@ mixin _$ProductCategory {
   @JsonKey(name: "meta_description")
   String? get metaDescription => throw _privateConstructorUsedError;
   @JsonKey(name: "carousel_image")
-  String? get carouselImage => throw _privateConstructorUsedError;
+  dynamic get carouselImage => throw _privateConstructorUsedError;
   @JsonKey(name: "product_type")
   dynamic get productType => throw _privateConstructorUsedError;
   @JsonKey(name: "product_category_faq")
@@ -509,7 +509,7 @@ abstract class $ProductCategoryCopyWith<$Res> {
       @JsonKey(name: "meta_title") String? metaTitle,
       @JsonKey(name: "description") String? description,
       @JsonKey(name: "meta_description") String? metaDescription,
-      @JsonKey(name: "carousel_image") String? carouselImage,
+      @JsonKey(name: "carousel_image") dynamic carouselImage,
       @JsonKey(name: "product_type") dynamic productType,
       @JsonKey(name: "product_category_faq") dynamic productCategoryFaq,
       @JsonKey(name: "created_by") String? createdBy,
@@ -578,7 +578,7 @@ class _$ProductCategoryCopyWithImpl<$Res, $Val extends ProductCategory>
       carouselImage: freezed == carouselImage
           ? _value.carouselImage
           : carouselImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       productType: freezed == productType
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
@@ -623,7 +623,7 @@ abstract class _$$ProductCategoryImplCopyWith<$Res>
       @JsonKey(name: "meta_title") String? metaTitle,
       @JsonKey(name: "description") String? description,
       @JsonKey(name: "meta_description") String? metaDescription,
-      @JsonKey(name: "carousel_image") String? carouselImage,
+      @JsonKey(name: "carousel_image") dynamic carouselImage,
       @JsonKey(name: "product_type") dynamic productType,
       @JsonKey(name: "product_category_faq") dynamic productCategoryFaq,
       @JsonKey(name: "created_by") String? createdBy,
@@ -690,7 +690,7 @@ class __$$ProductCategoryImplCopyWithImpl<$Res>
       carouselImage: freezed == carouselImage
           ? _value.carouselImage
           : carouselImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       productType: freezed == productType
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
@@ -764,7 +764,7 @@ class _$ProductCategoryImpl implements _ProductCategory {
   final String? metaDescription;
   @override
   @JsonKey(name: "carousel_image")
-  final String? carouselImage;
+  final dynamic carouselImage;
   @override
   @JsonKey(name: "product_type")
   final dynamic productType;
@@ -804,8 +804,8 @@ class _$ProductCategoryImpl implements _ProductCategory {
                 other.description == description) &&
             (identical(other.metaDescription, metaDescription) ||
                 other.metaDescription == metaDescription) &&
-            (identical(other.carouselImage, carouselImage) ||
-                other.carouselImage == carouselImage) &&
+            const DeepCollectionEquality()
+                .equals(other.carouselImage, carouselImage) &&
             const DeepCollectionEquality()
                 .equals(other.productType, productType) &&
             const DeepCollectionEquality()
@@ -831,7 +831,7 @@ class _$ProductCategoryImpl implements _ProductCategory {
       metaTitle,
       description,
       metaDescription,
-      carouselImage,
+      const DeepCollectionEquality().hash(carouselImage),
       const DeepCollectionEquality().hash(productType),
       const DeepCollectionEquality().hash(productCategoryFaq),
       createdBy,
@@ -863,7 +863,7 @@ abstract class _ProductCategory implements ProductCategory {
       @JsonKey(name: "meta_title") final String? metaTitle,
       @JsonKey(name: "description") final String? description,
       @JsonKey(name: "meta_description") final String? metaDescription,
-      @JsonKey(name: "carousel_image") final String? carouselImage,
+      @JsonKey(name: "carousel_image") final dynamic carouselImage,
       @JsonKey(name: "product_type") final dynamic productType,
       @JsonKey(name: "product_category_faq") final dynamic productCategoryFaq,
       @JsonKey(name: "created_by") final String? createdBy,
@@ -898,7 +898,7 @@ abstract class _ProductCategory implements ProductCategory {
   String? get metaDescription;
   @override
   @JsonKey(name: "carousel_image")
-  String? get carouselImage;
+  dynamic get carouselImage;
   @override
   @JsonKey(name: "product_type")
   dynamic get productType;
