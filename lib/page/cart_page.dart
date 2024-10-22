@@ -224,11 +224,11 @@ class _MyCartPageState extends State<MyCartPage> {
                 builder: (context, ref, child) {
                   return AppButton(
                     onPressed: () async {
-                      context.push(
-                        CheckoutPage(
-                          selectedItems: selectedItems,
-                        ),
-                      );
+                      // context.push(
+                      //   CheckoutPage(
+                      //     selectedItems: selectedItems,
+                      //   ),
+                      // );
                     },
                     child: const Text('Proceed to Checkout'),
                   );
@@ -237,7 +237,7 @@ class _MyCartPageState extends State<MyCartPage> {
               Consumer(builder: (context, ref, child) {
                 return AppButton(
                   onPressed: () async {
-                    context.push(CheckoutPage(selectedItems: selectedItems,));
+                   // context.push(CheckoutPage(selectedItems: selectedItems,));
                   },
                   child: const Text('Proceed to Checkout'),
                 );

@@ -52,9 +52,7 @@ _$ProductCategoryImpl _$$ProductCategoryImplFromJson(
       metaTitle: json['meta_title'] as String?,
       description: json['description'] as String?,
       metaDescription: json['meta_description'] as String?,
-      carouselImage: (json['carousel_image'] as List<dynamic>?)
-          ?.map((e) => CarouselImage.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      carouselImage: json['carousel_image'] as String?,
       productType: json['product_type'],
       productCategoryFaq: json['product_category_faq'],
       createdBy: json['created_by'] as String?,

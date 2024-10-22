@@ -45,9 +45,6 @@ class _HomePageState extends State<HomePage> {
             _buildImageGallery(context, featuredImages),
             _sliverSpace(context: context, height: 40),
 
-            /// Category Text
-            _buildSectionHeader(context, 'Category'),
-
             /// category list
             _buildCategoryList(context),
             _sliverSpace(context: context),
@@ -82,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                childAspectRatio: .8,
+                childAspectRatio: .7,
               ),
               itemBuilder: (context, index) {
                 final category = categories.value!.productCategory![index];
@@ -298,6 +295,7 @@ class _HomePageState extends State<HomePage> {
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
             const SizedBox(height: 20),

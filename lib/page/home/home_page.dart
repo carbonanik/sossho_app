@@ -48,15 +48,16 @@ class _HomePageState extends State<HomePage> {
               _buildImageGallery(context, featuredImages),
               _sliverSpace(context: context, height: 40),
 
-              /// Category Text
-              // _buildSectionHeader(context, 'Category'),
-
-              /// category list
+              // Category Text
+              _buildSectionHeader(context, 'Category'),
+              //  _buildCategoryList(context),
+              _sliverSpace(context: context),
+              // category list
               _buildCategoryList(context),
               _sliverSpace(context: context),
 
-              // _buildSectionHeader(context, 'Popular Products'),
-              // _buildProductGrid(context),
+              _buildSectionHeader(context, 'Popular Products'),
+              // _buildProductGrid(context, featuredImages),
               // _sliverSpace(context: context),
 
               if (homeProducts.valueOrNull?.popularProducts?.isNotEmpty ??
@@ -130,6 +131,7 @@ class _HomePageState extends State<HomePage> {
       child: Consumer(
         builder: (context, ref, child) {
           final categories = ref.watch(categoriesProvider);
+          print(" the item is here$categories");
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -189,9 +191,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   itemBuilder: (context, index) {
                     final category = categories.value!.productCategory![index];
+                    print(" the category is here${category}");
                     return Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.black,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Column(

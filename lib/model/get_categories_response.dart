@@ -39,7 +39,7 @@ class ProductCategory with _$ProductCategory {
     @JsonKey(name: "meta_title") String? metaTitle,
     @JsonKey(name: "description") String? description,
     @JsonKey(name: "meta_description") String? metaDescription,
-    @JsonKey(name: "carousel_image") List<CarouselImage>? carouselImage,
+    @JsonKey(name: "carousel_image") String? carouselImage,
     @JsonKey(name: "product_type") dynamic productType,
     @JsonKey(name: "product_category_faq") dynamic productCategoryFaq,
     @JsonKey(name: "created_by") String? createdBy,
