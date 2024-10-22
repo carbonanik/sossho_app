@@ -220,24 +220,26 @@ class _MyCartPageState extends State<MyCartPage> {
               }),
 
               /// Continue to pay button
-              Consumer(
-                builder: (context, ref, child) {
-                  return AppButton(
-                    onPressed: () async {
-                      // context.push(
-                      //   CheckoutPage(
-                      //     selectedItems: selectedItems,
-                      //   ),
-                      // );
-                    },
-                    child: const Text('Proceed to Checkout'),
-                  );
-                },
-              ),
+              // Consumer(
+              //   builder: (context, ref, child) {
+              //     return AppButton(
+              //       onPressed: () async {
+              //         // context.push(
+              //         //   CheckoutPage(
+              //         //     selectedItems: selectedItems,
+              //         //   ),
+              //         // );
+              //       },
+              //       child: const Text('Proceed to Checkout'),
+              //     );
+              //   },
+              // ),
               Consumer(builder: (context, ref, child) {
                 return AppButton(
                   onPressed: () async {
-                   // context.push(CheckoutPage(selectedItems: selectedItems,));
+                    context.push(CheckoutPage(
+                      selectedItems: selectedItems,
+                    ));
                   },
                   child: const Text('Proceed to Checkout'),
                 );

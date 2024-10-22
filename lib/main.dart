@@ -32,12 +32,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-            seedColor: accentColor.withOpacity(0.1),
-            primary: accentColor.withOpacity(0.1),
+            seedColor: accentColor,
+            primary: accentColor,
           ),
           useMaterial3: true,
         ),
-        home: const HomePage(),
+        home: const MainTabs(),
       ),
     );
   }
