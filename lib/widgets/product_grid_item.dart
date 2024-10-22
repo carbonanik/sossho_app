@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:sossho_app/model/public_product_response.dart';
 
@@ -46,7 +48,7 @@ class ProductGridItem extends StatelessWidget {
                     ),
                     image: DecorationImage(
                       image: NetworkImage(
-                        product.images?.firstOrNull ?? '',
+                        jsonDecode(product.images)?[0]?["image_path"] ?? "",
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -101,7 +103,7 @@ class ProductGridItem extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child:   Text(
+                        child: Text(
                           '${product.price ?? ' '}' ' BDT',
                           style: const TextStyle(
                             fontSize: 12,
@@ -124,7 +126,6 @@ class ProductGridItem extends StatelessWidget {
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),

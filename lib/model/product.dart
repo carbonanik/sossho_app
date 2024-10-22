@@ -31,11 +31,11 @@ class Product with _$Product {
     @JsonKey(name: "meta_description")
     String? metaDescription,
     @JsonKey(name: "images")
-    List<String>? images,
+    dynamic images,
     @JsonKey(name: "main_feature")
-    List<String>? mainFeature,
+    dynamic mainFeature,
     @JsonKey(name: "product_faq")
-    List<String>? productFaq,
+    dynamic productFaq,
     @JsonKey(name: "content")
     String? content,
     @JsonKey(name: "status")
