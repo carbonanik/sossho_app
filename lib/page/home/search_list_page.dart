@@ -36,28 +36,28 @@ class SearchListPage extends StatelessWidget {
 
             print(products);
 
-            return const SliverToBoxAdapter(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
+            // return const SliverToBoxAdapter(
+            //   child: Center(
+            //     child: CircularProgressIndicator(),
+            //   ),
+            // );
 
             return SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       'Search Of "Shoes"',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
                       '${products.value?.products?.length ?? 0} Results Found',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.redAccent,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -74,11 +74,11 @@ class SearchListPage extends StatelessWidget {
 
             print(products);
 
-            return const SliverToBoxAdapter(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
+            // return const SliverToBoxAdapter(
+            //   child: Center(
+            //     child: CircularProgressIndicator(),
+            //   ),
+            // );
 
             return SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

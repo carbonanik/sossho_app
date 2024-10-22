@@ -15,9 +15,7 @@ _$ProductBrandImpl _$$ProductBrandImplFromJson(Map<String, dynamic> json) =>
       metaTitle: json['meta_title'] as String?,
       description: json['description'] as String?,
       metaDescription: json['meta_description'] as String?,
-      carouselImage: (json['carousel_image'] as List<dynamic>?)
-          ?.map((e) => CarouselImage.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      carouselImage: json['carousel_image'] as String?,
       productType: json['product_type'],
       productCategory: json['product_category'],
       productBrandFaq: json['product_brand_faq'],

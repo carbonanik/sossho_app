@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sossho_app/page/cart_page.dart';
 import 'package:sossho_app/page/home/search_list_page.dart';
 
 import 'package:sossho_app/page/profile/profile_page.dart';

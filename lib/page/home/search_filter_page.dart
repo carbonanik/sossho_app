@@ -193,7 +193,7 @@ class _SearchFilterPageState extends ConsumerState<SearchFilterPage> {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
-                      'Category',
+                      'Brand Category',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -235,7 +235,7 @@ class _SearchFilterPageState extends ConsumerState<SearchFilterPage> {
   Consumer _buildProductsBrands() {
     return Consumer(
       builder: (context, ref, child) {
-        return Column(
+        return Wrap(
           children: [
             ...List.generate(
               brands.length,
@@ -282,7 +282,8 @@ class _SearchFilterPageState extends ConsumerState<SearchFilterPage> {
   Consumer _buildCategoriesList() {
     return Consumer(
       builder: (context, ref, child) {
-        return Column(
+        return Wrap(
+          runSpacing: 10,
           children: [
             ...List.generate(
               categories.length,

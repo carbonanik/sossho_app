@@ -35,7 +35,7 @@ mixin _$Category {
   @JsonKey(name: "meta_description")
   String? get metaDescription => throw _privateConstructorUsedError;
   @JsonKey(name: "carousel_image")
-  List<CarouselImage>? get carouselImage => throw _privateConstructorUsedError;
+  String? get carouselImage => throw _privateConstructorUsedError;
   @JsonKey(name: "product_type")
   dynamic get productType => throw _privateConstructorUsedError;
   @JsonKey(name: "product_category_faq")
@@ -68,7 +68,7 @@ abstract class $CategoryCopyWith<$Res> {
       @JsonKey(name: "meta_title") String? metaTitle,
       @JsonKey(name: "description") String? description,
       @JsonKey(name: "meta_description") String? metaDescription,
-      @JsonKey(name: "carousel_image") List<CarouselImage>? carouselImage,
+      @JsonKey(name: "carousel_image") String? carouselImage,
       @JsonKey(name: "product_type") dynamic productType,
       @JsonKey(name: "product_category_faq") dynamic productCategoryFaq,
       @JsonKey(name: "created_by") String? createdBy,
@@ -137,7 +137,7 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
       carouselImage: freezed == carouselImage
           ? _value.carouselImage
           : carouselImage // ignore: cast_nullable_to_non_nullable
-              as List<CarouselImage>?,
+              as String?,
       productType: freezed == productType
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
@@ -182,7 +182,7 @@ abstract class _$$CategoryImplCopyWith<$Res>
       @JsonKey(name: "meta_title") String? metaTitle,
       @JsonKey(name: "description") String? description,
       @JsonKey(name: "meta_description") String? metaDescription,
-      @JsonKey(name: "carousel_image") List<CarouselImage>? carouselImage,
+      @JsonKey(name: "carousel_image") String? carouselImage,
       @JsonKey(name: "product_type") dynamic productType,
       @JsonKey(name: "product_category_faq") dynamic productCategoryFaq,
       @JsonKey(name: "created_by") String? createdBy,
@@ -247,9 +247,9 @@ class __$$CategoryImplCopyWithImpl<$Res>
           : metaDescription // ignore: cast_nullable_to_non_nullable
               as String?,
       carouselImage: freezed == carouselImage
-          ? _value._carouselImage
+          ? _value.carouselImage
           : carouselImage // ignore: cast_nullable_to_non_nullable
-              as List<CarouselImage>?,
+              as String?,
       productType: freezed == productType
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
@@ -289,14 +289,13 @@ class _$CategoryImpl with DiagnosticableTreeMixin implements _Category {
       @JsonKey(name: "meta_title") this.metaTitle,
       @JsonKey(name: "description") this.description,
       @JsonKey(name: "meta_description") this.metaDescription,
-      @JsonKey(name: "carousel_image") final List<CarouselImage>? carouselImage,
+      @JsonKey(name: "carousel_image") this.carouselImage,
       @JsonKey(name: "product_type") this.productType,
       @JsonKey(name: "product_category_faq") this.productCategoryFaq,
       @JsonKey(name: "created_by") this.createdBy,
       @JsonKey(name: "updated_by") this.updatedBy,
       @JsonKey(name: "created_at") this.createdAt,
-      @JsonKey(name: "updated_at") this.updatedAt})
-      : _carouselImage = carouselImage;
+      @JsonKey(name: "updated_at") this.updatedAt});
 
   factory _$CategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoryImplFromJson(json);
@@ -322,17 +321,9 @@ class _$CategoryImpl with DiagnosticableTreeMixin implements _Category {
   @override
   @JsonKey(name: "meta_description")
   final String? metaDescription;
-  final List<CarouselImage>? _carouselImage;
   @override
   @JsonKey(name: "carousel_image")
-  List<CarouselImage>? get carouselImage {
-    final value = _carouselImage;
-    if (value == null) return null;
-    if (_carouselImage is EqualUnmodifiableListView) return _carouselImage;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final String? carouselImage;
   @override
   @JsonKey(name: "product_type")
   final dynamic productType;
@@ -393,8 +384,8 @@ class _$CategoryImpl with DiagnosticableTreeMixin implements _Category {
                 other.description == description) &&
             (identical(other.metaDescription, metaDescription) ||
                 other.metaDescription == metaDescription) &&
-            const DeepCollectionEquality()
-                .equals(other._carouselImage, _carouselImage) &&
+            (identical(other.carouselImage, carouselImage) ||
+                other.carouselImage == carouselImage) &&
             const DeepCollectionEquality()
                 .equals(other.productType, productType) &&
             const DeepCollectionEquality()
@@ -420,7 +411,7 @@ class _$CategoryImpl with DiagnosticableTreeMixin implements _Category {
       metaTitle,
       description,
       metaDescription,
-      const DeepCollectionEquality().hash(_carouselImage),
+      carouselImage,
       const DeepCollectionEquality().hash(productType),
       const DeepCollectionEquality().hash(productCategoryFaq),
       createdBy,
@@ -451,7 +442,7 @@ abstract class _Category implements Category {
       @JsonKey(name: "meta_title") final String? metaTitle,
       @JsonKey(name: "description") final String? description,
       @JsonKey(name: "meta_description") final String? metaDescription,
-      @JsonKey(name: "carousel_image") final List<CarouselImage>? carouselImage,
+      @JsonKey(name: "carousel_image") final String? carouselImage,
       @JsonKey(name: "product_type") final dynamic productType,
       @JsonKey(name: "product_category_faq") final dynamic productCategoryFaq,
       @JsonKey(name: "created_by") final String? createdBy,
@@ -485,7 +476,7 @@ abstract class _Category implements Category {
   String? get metaDescription;
   @override
   @JsonKey(name: "carousel_image")
-  List<CarouselImage>? get carouselImage;
+  String? get carouselImage;
   @override
   @JsonKey(name: "product_type")
   dynamic get productType;
