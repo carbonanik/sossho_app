@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sossho_app/page/home/categories_page.dart';
 
 import 'package:sossho_app/page/home/product_detail_page.dart';
 import 'package:sossho_app/page/home/search_filter_page.dart';
 import 'package:sossho_app/page/profile/profile_page.dart';
 import 'package:sossho_app/page/home/search_list_page.dart';
-import 'package:sossho_app/providers/categories_provider.dart';
 import 'package:sossho_app/utils/navigation.dart';
 
 import '../../model/product.dart';
+import '../../providers/categories_provider.dart';
 import '../../providers/public_product_provider.dart';
 import '../../utils/colors.dart';
 import '../../widgets/product_grid_item.dart';
+import 'categories_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         color: backgroundColor,
         child: Consumer(builder: (context, ref, child) {
           final homeProducts = ref.watch(homeProductsProvider);
-          print(homeProducts);
+          print( "the product all data is this $homeProducts");
           return CustomScrollView(
             slivers: [
               /// top selector
@@ -51,10 +51,6 @@ class _HomePageState extends State<HomePage> {
               // category list
               _buildCategoryList(context),
               _sliverSpace(context: context),
-
-              //_buildSectionHeader(context, 'Popular Products'),
-              // _buildProductGrid(context, featuredImages),
-              // _sliverSpace(context: context),
 
               if (homeProducts.valueOrNull?.popularProducts?.isNotEmpty ??
                   false) ...[
@@ -127,10 +123,11 @@ class _HomePageState extends State<HomePage> {
       child: Consumer(
         builder: (context, ref, child) {
           final categories = ref.watch(categoriesProvider);
+          print('all categories $categories');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (categories.valueOrNull?.productCategory?.isNotEmpty ?? false)
+              if (categories.valueOrNull?.productCategory?.isNotEmpty ?? true)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(

@@ -8,14 +8,13 @@ class DioClient implements ApiClient {
   // final cookieJar = CookieJar();
 
   DioClient({required String baseUrl}) {
-    _client = Dio()
-          ..options.baseUrl = baseUrl
-          // ..interceptors.add(
-          //   LogInterceptor(
-          //     responseBody: true,
-          //     requestBody: true,
-          //   ),
-          // )
+    _client = Dio()..options.baseUrl = baseUrl
+        // ..interceptors.add(
+        //   LogInterceptor(
+        //     responseBody: true,
+        //     requestBody: true,
+        //   ),
+        // )
         //
         ;
   }

@@ -1,10 +1,19 @@
+import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sossho_app/page/cart_page.dart';
+import 'package:sossho_app/page/favorites_page.dart';
 import 'package:sossho_app/page/home/blog_list_page.dart';
 import 'package:sossho_app/page/home/home_page.dart';
 import 'package:sossho_app/page/my_order_page.dart';
-
+import 'package:sossho_app/page/home/product_detail_page.dart';
 import 'package:sossho_app/page/profile/profile_page.dart';
+import 'package:sossho_app/providers/categories_provider.dart';
+import 'package:sossho_app/utils/navigation.dart';
+import '../../providers/public_product_provider.dart';
+import '../../utils/colors.dart';
+import '../../widgets/product_grid_item.dart';
 
 class MainTabs extends StatefulWidget {
   const MainTabs({super.key});
